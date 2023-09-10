@@ -28,4 +28,5 @@ urlpatterns = [
     path('<int:pk>/password/', PasswordChangeView.as_view(success_url='/main/personal/'), name='password_change'),
     path('diagram/', views.DiagramView.as_view(), name='diagram'),
     path('static_info/', views.StaticInfoView.as_view(), name='static_info'),
+    path('about_us/', views.AboutUsView.as_view(), name='about_us'),
 ]

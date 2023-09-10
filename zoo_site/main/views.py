@@ -15,9 +15,11 @@ import logging
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.conf import settings
 
 
 logger = logging.getLogger(__name__)
+
 
 class HomeView(View):
     @staticmethod
@@ -134,7 +136,7 @@ class StafferListView(generic.ListView):
 
 
 class StafferDetailsView(View):
-   # @staticmethod
+    @staticmethod
     def get(self, request, id):
         try:
             staffer = Staffer.objects.get(id=id)
@@ -463,8 +465,29 @@ class StaticInfoView(View):
             context
         )
 
+
 def formatted_datetime():
     current_datetime = datetime.now()
     result = current_datetime.strftime("%d-%m-%Y %H:%M:%S")
     return str(result)
+
+
+class AboutUsView(View):
+    @staticmethod
+    def get(request):
+        with open('./static/txt/basic_information.txt') as file:
+            basic_information = file.read()
+        with open('./static/txt/our_history.txt') as file:
+            our_history = file.read()
+
+        context = {
+            'basic_information': basic_information,
+            'our_history': our_history,
+        }
+
+        return render(
+            request,
+            'main/about_us.html',
+            context
+        )
 

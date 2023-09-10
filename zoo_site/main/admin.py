@@ -1,14 +1,5 @@
 from django.contrib import admin
-from .models import Animal, AnimalClass, Staffer, Post, Placement, Species, Country, Fodder
-
-# admin.site.register(Animal)
-# admin.site.register(AnimalClass)
-# admin.site.register(Staffer)
-# admin.site.register(Post)
-# admin.site.register(Placement)
-# admin.site.register(Species)
-# admin.site.register(Country)
-# admin.site.register(Fodder)
+from .models import Animal, AnimalClass, Staffer, Post, Placement, Species, Country, Fodder, Client
 
 
 @admin.register(Animal)
@@ -101,3 +92,8 @@ class FodderAdmin(admin.ModelAdmin):
 
     display_animals_count.short_description = 'Animals count'
     display_general_daily_feed.short_description = 'General daily feed'
+
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    pass

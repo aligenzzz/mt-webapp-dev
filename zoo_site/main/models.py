@@ -1,6 +1,11 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+phone_regex = RegexValidator(
+        regex=r'^\+375 \(\d{2}\) \d{3}-\d{2}-\d{2}$',
+        message="Phone number must be in the format: '+375 (29) XXX-XX-XX'"
+    )
+
 class Country(models.Model):
     name = models.CharField(max_length=30)
 
@@ -70,12 +75,8 @@ class Placement(models.Model):
     def __str__(self):
         return f'{self.name} {self.number}'
 
-class Staffer(models.Model):
-    phone_regex = RegexValidator(
-        regex=r'^\+375 \(\d{2}\) \d{3}-\d{2}-\d{2}$',
-        message="Phone number must be in the format: '+375 (29) XXX-XX-XX'"
-    )
 
+class Staffer(models.Model):
     name = models.CharField(max_length=30)
     post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
     phone_number = models.CharField(max_length=20, validators=[phone_regex], default='+375 (29) XXX-XX-XX')
@@ -110,3 +111,16 @@ class Animal(models.Model):
 
     def __str__(self):
         return f'{self.species} {self.name}'
+
+
+class Client(models.Model):
+    name = models.CharField(max_length=30)
+    phone_number = models.CharField(max_length=20, validators=[phone_regex], default='+375 (29) XXX-XX-XX')
+    username = models.CharField(max_length=30, default='')
+
+    class Meta:
+        verbose_name = "Client"
+        verbose_name_plural = "Clients"
+
+    def __str__(self):
+        return f'{self.username} ({self.name})'

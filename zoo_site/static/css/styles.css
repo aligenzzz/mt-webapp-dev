@@ -1,0 +1,43 @@
+header, footer {
+    background-color: #20603d;
+}
+
+.icon {
+    width: 5%;
+    height: auto;
+    margin: 10px;
+}
+
+.mini-icon {
+    width: 2%;
+    height: auto;
+    margin: 10px;
+}
+
+.simple-image {
+    max-width: 500px;
+}
+
+.menu-item {
+    font-family: "Times New Roman";
+    color: white;
+    font-size: 15px;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 5px;
+    transition: font-size 0.2s;
+}
+
+.menu-item:hover {
+    color: white;
+    font-size: 25px;
+}
+
+.menu-item:pressed {
+    color: white;
+}
+
+
+
+
