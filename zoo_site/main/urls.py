@@ -29,4 +29,11 @@ urlpatterns = [
     path('diagram/', views.DiagramView.as_view(), name='diagram'),
     path('static_info/', views.StaticInfoView.as_view(), name='static_info'),
     path('about_us/', views.AboutUsView.as_view(), name='about_us'),
+    path('vacancies/', views.VacancyListView.as_view(), name='vacancies'),
+    path('questions/', views.QuestionListView.as_view(), name='questions'),
+    path('reviews/', views.ReviewListView.as_view(), name='reviews'),
+    path('articles/', views.ArticleListView.as_view(), name='news'),
+    path('articles/<int:id>/', views.ArticleView.as_view(), name='article'),
+    path('coupons/', views.CouponListView.as_view(), name='coupons'),
+    path('privacy_policy/', views.PrivacyPolicyView.as_view(), name='privacy_policy')
 ]

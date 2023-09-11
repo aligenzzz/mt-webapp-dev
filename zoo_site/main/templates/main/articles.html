@@ -1,0 +1,26 @@
+{% extends 'main/index.html' %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+  <h1>News</h1>
+
+    {% if article_list %}
+    <ul>
+
+      {% for article in article_list %}
+      <li style="margin: 10px;">
+          <img src="{{ article.image }}" style="max-width: 200px;">
+          <h2>{{ article.title }}</h2>
+          <p>{{ article.date }}</p>
+          <p>{{ article.short_description }}</p>
+          <a href="/main/articles/{{ article.id }}">Read more...</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no articles.</p>
+    {% endif %}
+
+{% endblock %}

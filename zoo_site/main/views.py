@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Animal, Placement, Staffer, Fodder
+from .models import Animal, Placement, Staffer, Fodder, Vacancy, Review, Question, Article, Coupon
 from django.http import Http404
 import requests
 from django.views import View
@@ -15,7 +15,6 @@ import logging
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.conf import settings
 
 
 logger = logging.getLogger(__name__)
@@ -137,16 +136,18 @@ class StafferListView(generic.ListView):
 
 class StafferDetailsView(View):
     @staticmethod
-    def get(self, request, id):
+    def get(request, id):
         try:
             staffer = Staffer.objects.get(id=id)
         except Staffer.DoesNotExist:
             raise Http404("Staffer doesn't exist :(")
 
+        user = User.objects.filter(username=staffer.username).first()
+
         return render(
             request,
             'main/staffer_detail.html',
-            context={'staffer': staffer, }
+            context={'staffer': staffer, 'email': user.email, }
         )
 
 
@@ -488,6 +489,71 @@ class AboutUsView(View):
         return render(
             request,
             'main/about_us.html',
+            context
+        )
+
+
+class VacancyListView(generic.ListView):
+    model = Vacancy
+    context_object_name = 'vacancy_list'
+    template_name = 'main/vacancies.html'
+
+
+class QuestionListView(generic.ListView):
+    model = Question
+    context_object_name = 'question_list'
+    template_name = 'main/questions.html'
+
+
+class ReviewListView(generic.ListView):
+    model = Review
+    context_object_name = 'review_list'
+    template_name = 'main/reviews.html'
+
+
+class ArticleListView(generic.ListView):
+    model = Article
+    context_object_name = 'article_list'
+    template_name = 'main/articles.html'
+
+
+class ArticleView(View):
+    @staticmethod
+    def get(request, id):
+        try:
+            article = Article.objects.get(id=id)
+        except Article.DoesNotExist:
+            raise Http404("Article doesn't exist :(")
+
+        with open('./static/txt/' + article.content) as file:
+            content = file.read()
+
+        return render(
+            request,
+            'main/article.html',
+            context={'article': article, 'content': content}
+        )
+
+
+class CouponListView(generic.ListView):
+    model = Coupon
+    context_object_name = 'coupon_list'
+    template_name = 'main/coupons.html'
+
+
+class PrivacyPolicyView(View):
+    @staticmethod
+    def get(request):
+        with open('./static/txt/privacy_policy.txt') as file:
+            content = file.read()
+
+        context = {
+            'content': content,
+        }
+
+        return render(
+            request,
+            'main/privacy_policy.html',
             context
         )
 

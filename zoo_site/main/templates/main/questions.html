@@ -1,0 +1,28 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Questions{% endblock %}
+
+{% block content %}
+  <h1>Questions and answers</h1>
+
+    {% if question_list %}
+    <ul>
+
+      {% for question in question_list %}
+      <li>
+          <details>
+              <summary><h3>{{ question.question }}</h3></summary>
+              <p>
+                  {{ question.answer }}<br>
+                  {{ question.date }}<br>
+              </p>
+          </details>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no questions.</p>
+    {% endif %}
+
+{% endblock %}

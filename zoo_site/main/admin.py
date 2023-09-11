@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Animal, AnimalClass, Staffer, Post, Placement, Species, Country, Fodder, Client
+from .models import Animal, AnimalClass, Staffer, Post, Placement, Species, Country, Fodder, \
+                    Client, Vacancy, Question, Review, Article, Coupon
 
 
 @admin.register(Animal)
@@ -96,4 +97,29 @@ class FodderAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Vacancy)
+class VacancyAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Coupon)
+class CouponAdmin(admin.ModelAdmin):
     pass

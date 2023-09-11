@@ -4,10 +4,13 @@
 
 {% block content %}
     <h1>Staffer Details</h1>
+    <img src="{{ staffer.photo }}" alt="Such image doesn't exist :(" style="max-width: 200px;">
     <ul>
         <li>Name: {{ staffer.name }}</li>
         <li>Post: {{ staffer.post }}</li>
         <li>Phone number: {{ staffer.phone_number }}</li>
+        <li>E-mail: {{ email }}</li>
+        <li>Description: {{ staffer.post.description }}</li>
         <li><a href="/main/staff/{{ staffer.id }}/animals">View Animals</a></li>
         <li><a href="/main/staff/{{ staffer.id }}/placements">View Placements</a></li>
     </ul>

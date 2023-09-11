@@ -25,7 +25,10 @@
 </head>
 
 <body>
-    <p style="text-align:center;" id="current-datetime"></p>
+    <div style="background-color: #20603d;">
+        <p style="text-align:center; color: white;" id="current-datetime"></p>
+    </div>
+
 
     <header>
         <div class="container">
@@ -33,9 +36,14 @@
                 <div class="navbar-nav">
                     <img class="icon" src="{% static 'img/icon.png' %}">
                     <a class="menu-item" href="{% url 'home' %}">Home</a>
+                    <a class="menu-item" href="{% url 'news' %}">News</a>
                     <a class="menu-item" href="{% url 'animals' %}">All animals</a>
                     <a class="menu-item" href="{% url 'placements' %}">All placements</a>
                     <a class="menu-item" href="{% url 'staff' %}">All staff</a>
+                    <a class="menu-item" href="{% url 'vacancies' %}">Our vacancies</a>
+                    <a class="menu-item" href="{% url 'questions' %}">Questions</a>
+                    <a class="menu-item" href="{% url 'reviews' %}">Reviews</a>
+                    <a class="menu-item" href="{% url 'coupons' %}">Coupons</a>
                     {% if user.is_authenticated %}
                         {% if user.is_superuser %}
                             <a class="menu-item" href="/admin/">Personal Account</a>
@@ -56,6 +64,12 @@
         {% block content %}
         <div class="container">
             <h1>ZOO HOME</h1>
+            <div class="image-container">
+                <img src="{% static 'img/banner1.png' %}" alt="Изображение 1">
+                <img src="{% static 'img/banner2.png' %}" alt="Изображение 2">
+                <img src="{% static 'img/banner3.png' %}" alt="Изображение 3">
+                <img src="{% static 'img/banner4.png' %}" alt="Изображение 3">
+            </div>
             <p>Welcome to our <em>Zoo</em>!</p>
             <p>You can read <a href="{% url 'about_us' %}">about us</a></p>
             <p><em>Random fact about cats: </em>{{ fact }}</p>
@@ -65,7 +79,7 @@
     </main>
 
     <footer style="margin-top: 10px;">
-        <div>
+        <div style="color: white">
             <ul style="list-style-type: none;">
                 <li>
                     <img class="mini-icon" src="{% static 'img/phone-icon.png' %}"/>
@@ -80,6 +94,7 @@
                     aap_zoo@gmail.com
                 </li>
             </ul>
+            <a href="{% url 'privacy_policy' %}">Privacy policy</a>
             <p>&copy; 2023 Zoo "Animal Adventure Park". All rights reserved.</p>
         </div>
     </footer>
