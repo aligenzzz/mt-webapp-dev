@@ -24,20 +24,15 @@
       <ul>
         {% for coupon in coupon_list %}
         <li>
-
-        <div style="border: 2px solid {% if coupon.is_active %} green; {% else %} red; {% endif %} padding: 20px;">
-          <h2>{{ coupon.discount }}%</h2>
-          <small>{{ coupon.description }}</small>
-        </div>
+          <div style="border: 2px solid {% if coupon.is_active %} green; {% else %} red; {% endif %} padding: 20px;">
+            <h2>{{ coupon.discount }}%</h2>
+            <small>{{ coupon.description }}</small>
+          </div>
         </li>
       </ul>
-
       {% endfor %}
-
     {% else %}
       <p>There are no coupons.</p>
     {% endif %}
   </div>
-
-
 {% endblock %}

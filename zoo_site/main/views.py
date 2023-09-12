@@ -1,13 +1,16 @@
-from django.shortcuts import render
+from django.contrib.auth import login
+from django.core.validators import RegexValidator
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views import generic
-from .models import Animal, Placement, Staffer, Fodder, Vacancy, Review, Question, Article, Coupon
+from .models import Animal, Placement, Staffer, Fodder, Vacancy, Review, Question, Article, Coupon, Client
 from django.http import Http404
 import requests
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from plotly.graph_objects import Bar, Layout, Figure
@@ -29,9 +32,12 @@ class HomeView(View):
         response = requests.get('https://catfact.ninja/fact')
         fact = response.json()['fact']
 
+        latest_article = Article.objects.latest('date')
+
         context = {
             'image_url': image_url,
-            'fact': fact
+            'fact': fact,
+            'latest_article': latest_article,
         }
 
         return render(request, 'main/index.html', context)
@@ -557,3 +563,72 @@ class PrivacyPolicyView(View):
             context
         )
 
+
+class RegistrationForm(UserCreationForm):
+    phone_number = forms.CharField(
+        validators=[
+            RegexValidator(
+                regex=r'^\+375 \(\d{2}\) \d{3}-\d{2}-\d{2}$',
+                message='Invalid phone number.'
+            )
+        ],
+        required=True
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
+
+def registration(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+
+            logger.info(f'New user {request.POST.get("username")} was added.')
+            client = Client.objects.create(username=request.POST.get('username'),
+                                           first_name=request.POST.get('first_name'),
+                                           last_name=request.POST.get('last_name'),
+                                           address=request.POST.get('address'),
+                                           phone_number=request.POST.get('phone_number'))
+            client.save()
+
+            return redirect('home')
+    else:
+        logger.info(f'Invalid data in the registration form.')
+        form = RegistrationForm()
+    return render(request, 'registration/registration.html', {'form': form})
+
+
+class ReviewCreate(CreateView):
+    model = Review
+    fields = ['rating', 'content']
+    success_url = reverse_lazy('reviews')
+
+    def form_valid(self, form):
+        try:
+            current_datetime = timezone.now()
+
+            review = form.save(commit=False)
+            review.date = current_datetime
+            review.username = self.request.user.username
+            review.save()
+
+            logger.info(f'Placement was created successfully by {self.request.user.username}.')
+            self.request.session['last_change'] = formatted_datetime()
+
+            return super().form_valid(form)
+        except Exception:
+            logger.error(f'Failed to create review by {self.request.user.username}!')
+            raise
+
+
+class HTMLView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'main/_html.html'
+        )

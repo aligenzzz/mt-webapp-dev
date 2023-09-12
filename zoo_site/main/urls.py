@@ -5,6 +5,7 @@ from django.contrib.auth.views import PasswordChangeView
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/registration/', views.registration, name='registration'),
     path('animals/', views.AnimalListView.as_view(), name='animals'),
     path('animals/<int:id>/', views.AnimalDetailsView.as_view(), name='animal'),
     path('placements/', views.PlacementListView.as_view(), name='placements'),
@@ -35,5 +36,7 @@ urlpatterns = [
     path('articles/', views.ArticleListView.as_view(), name='news'),
     path('articles/<int:id>/', views.ArticleView.as_view(), name='article'),
     path('coupons/', views.CouponListView.as_view(), name='coupons'),
-    path('privacy_policy/', views.PrivacyPolicyView.as_view(), name='privacy_policy')
+    path('privacy_policy/', views.PrivacyPolicyView.as_view(), name='privacy_policy'),
+    path('reviews/add/', views.ReviewCreate.as_view(), name='add_review'),
+    path('html/', views.HTMLView.as_view(), name='html'),
 ]

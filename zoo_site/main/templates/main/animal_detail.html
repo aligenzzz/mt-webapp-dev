@@ -3,8 +3,9 @@
 {% block title %}Animal Details{% endblock %}
 
 {% block content %}
-  <h1>Animal Details</h1>
-  <img src="{{ animal.image }}" alt="Such image doesn't exist :(" style="max-width: 200px;">
+    <h1>Animal Details</h1>
+
+    <img src="{{ animal.image }}" alt="Such image doesn't exist :(" style="max-width: 200px;">
     <ul>
         <li>Name: {{ animal.name }}</li>
         <li>Species: {{ animal.species }}</li>
@@ -18,6 +19,7 @@
         <li>Info: {{ animal.info }}</li>
         <li>Daily feed: {{ animal.daily_feed }}</li>
     </ul>
+
     {% if user.is_authenticated %}
         {% if user.username == animal.staffer.username %}
             <p><a href="/main/animals/{{ animal.id }}/edit/">Edit</a></p>

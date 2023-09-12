@@ -3,6 +3,7 @@
 {% block title %}About us{% endblock %}
 
 {% block content %}
+  {% load static %}
   <h1>About us</h1>
   <h2>Basic information</h2>
   <p>{{ basic_information }}</p>
@@ -11,8 +12,13 @@
   <h2>Video</h2>
   <iframe width="560" height="315" src="https://www.youtube.com/embed/W2W6ZoaSAzc?autoplay=1"
           frameborder="0" allowfullscreen></iframe>
+  <h2>Audio</h2>
+  <audio controls>
+        <source src="{% static 'audio/birds_singing.mp3' %}">
+  </audio>
   <h2>Documents</h2>
-  {% load static %}
+
   <img src="{% static 'img/certificate.jpg' %}"/>
+  <a href="{% static 'img/certificate.jpg' %}" download>Download</a>
 
 {% endblock %}

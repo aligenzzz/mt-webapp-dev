@@ -29,7 +29,6 @@
         <p style="text-align:center; color: white;" id="current-datetime"></p>
     </div>
 
-
     <header>
         <div class="container">
             <nav>
@@ -55,6 +54,7 @@
                     {% else %}
                         <a class="menu-item" href="/main/accounts/login/">Personal Account</a>
                     {% endif %}
+                    <a class="menu-item" href="{% url 'html' %}">HTML</a>
                 </div>
             </nav>
         </div>
@@ -65,13 +65,23 @@
         <div class="container">
             <h1>ZOO HOME</h1>
             <div class="image-container">
-                <img src="{% static 'img/banner1.png' %}" alt="Изображение 1">
-                <img src="{% static 'img/banner2.png' %}" alt="Изображение 2">
-                <img src="{% static 'img/banner3.png' %}" alt="Изображение 3">
-                <img src="{% static 'img/banner4.png' %}" alt="Изображение 3">
+                <img src="{% static 'img/banner1.png' %}">
+                <img src="{% static 'img/banner2.png' %}">
+                <img src="{% static 'img/banner3.png' %}">
+                <img src="{% static 'img/banner4.png' %}">
             </div>
             <p>Welcome to our <em>Zoo</em>!</p>
             <p>You can read <a href="{% url 'about_us' %}">about us</a></p>
+
+            <div style="margin: 10 px;">
+                <h1>Latest article</h1>
+                <img src="{{ latest_article.image }}" style="max-width: 200px;">
+                <h2>{{ latest_article.title }}</h2>
+                <small>{{ latest_article.date }}</small>
+                <p>{{ latest_article.short_description }}</p>
+                <a href="/main/articles/{{ latest_article.id }}">Read more...</a>
+            </div>
+
             <p><em>Random fact about cats: </em>{{ fact }}</p>
             <img class="simple-image" src="{{ image_url }}" alt="Such image doesn't exist :(">
         </div>
@@ -83,20 +93,29 @@
             <ul style="list-style-type: none;">
                 <li>
                     <img class="mini-icon" src="{% static 'img/phone-icon.png' %}"/>
-                    +375 (29) 822-59-99
+                    <a href="tel:+375298225999" target="_blank">+375 (29) 822-59-99</a>
                 </li>
                 <li>
                     <img class="mini-icon" src="{% static 'img/address-icon.png' %}"/>
-                    Minsk, Petrusya Brovki str., 10
+                    <a href="https://maps.google.com/maps?q=10+Petrusya+Brovki+street,+Minsk,+Belarus" target="_blank">
+                        Minsk, Petrusya Brovki str., 10
+                    </a>
                 </li>
                 <li>
                     <img class="mini-icon" src="{% static 'img/email-icon.png' %}"/>
-                    aap_zoo@gmail.com
+                    <a href="mailto:aap_zoo@gmail.com" target="_blank">aap_zoo@gmail.com</a>
                 </li>
             </ul>
             <a href="{% url 'privacy_policy' %}">Privacy policy</a>
             <p>&copy; 2023 Zoo "Animal Adventure Park". All rights reserved.</p>
         </div>
+
+        <a target="_blank" href="https://afisha.relax.by/">
+            <img class="mini-icon" src="{% static 'img/partner1.png' %}">
+        </a>
+        <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
+            <img class="mini-icon" src="{% static 'img/partner2.png' %}">
+        </a>
     </footer>
 </body>
 </html>

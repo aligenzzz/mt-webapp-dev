@@ -3,7 +3,9 @@
 {% block title %}Article{% endblock %}
 
 {% block content %}
-    <h1>{{ article.title }}</h1>
-    <p>{{ content }}</p>
-    <small>{{ article.date }}</small>
+    <div itemscope itemtype="https://schema.org/Article">
+        <h1 itemprop="name">{{ article.title }}</h1>
+        <p itemprop="text">{{ content }}</p>
+        <small itemprop="datePublished">{{ article.date }}</small>
+    </div>
 {% endblock %}

@@ -1,12 +1,13 @@
 import datetime
 
 from django.db import models
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 
 phone_regex = RegexValidator(
         regex=r'^\+375 \(\d{2}\) \d{3}-\d{2}-\d{2}$',
         message="Phone number must be in the format: '+375 (29) XXX-XX-XX'"
     )
+
 
 class Country(models.Model):
     name = models.CharField(max_length=30)
@@ -160,7 +161,10 @@ class Review(models.Model):
     content = models.CharField(max_length=1000, blank=False, null=False)
     date = models.DateField(null=False, blank=False, default=datetime.date.today())
     username = models.CharField(max_length=30, blank=False, null=False)
-    rating = models.PositiveIntegerField(default=0)
+    rating = models.PositiveIntegerField(default=0, validators=[
+            MinValueValidator(0, message="The rating cannot be < 0"),
+            MaxValueValidator(10, message="The rating cannot be > 0"),
+        ])
 
     class Meta:
         verbose_name = "Review"

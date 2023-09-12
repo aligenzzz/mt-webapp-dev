@@ -1,0 +1,30 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block content %}
+    {% load filters %}
+    <h1>Reviews</h1>
+    {% if user.is_authenticated %}
+        {% if user.username|is_client %}
+            <a href="{% url 'add_review' %}">Leave a review...</a>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'registration' %}">Leave a review...</a>
+    {% endif %}
+
+    {% if review_list %}
+    <ul>
+        {% for review in review_list %}
+        <li itemscope itemtype="https://schema.org/Review">
+            <h3 itemprop="reviewRating">{{ review.rating }}/10</h3>
+            <small itemprop="datePublished">{{ review.date }}</small>
+            <p itemprop="text">{{ review.content }}</p>
+            <small itemprop="author">{{ review.username }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>There are no reviews.</p>
+    {% endif %}
+{% endblock %}

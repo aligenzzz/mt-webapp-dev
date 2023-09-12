@@ -3,24 +3,20 @@
 {% block title %}News{% endblock %}
 
 {% block content %}
-  <h1>News</h1>
-
+    <h1>News</h1>
     {% if article_list %}
     <ul>
-
-      {% for article in article_list %}
-      <li style="margin: 10px;">
-          <img src="{{ article.image }}" style="max-width: 200px;">
-          <h2>{{ article.title }}</h2>
-          <p>{{ article.date }}</p>
-          <p>{{ article.short_description }}</p>
-          <a href="/main/articles/{{ article.id }}">Read more...</a>
-      </li>
-      {% endfor %}
-
+        {% for article in article_list %}
+            <li itemscope itemtype="https://schema.org/Article" style="margin: 10px;">
+                <img itemprop="image" src="{{ article.image }}" style="max-width: 200px;">
+                <h2 itemprop="name">{{ article.title }}</h2>
+                <small itemprop="datePublished">{{ article.date }}</small>
+                <p itemprop="description">{{ article.short_description }}</p>
+                <a href="/main/articles/{{ article.id }}">Read more...</a>
+            </li>
+        {% endfor %}
     </ul>
     {% else %}
-      <p>There are no articles.</p>
+        <p>There are no articles.</p>
     {% endif %}
-
 {% endblock %}
