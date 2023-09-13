@@ -102,7 +102,7 @@ class Animal(models.Model):
     animal_class = models.ForeignKey(AnimalClass, on_delete=models.SET_NULL, null=True, blank=True)
     staffer = models.ForeignKey(Staffer, on_delete=models.SET_NULL, null=True, blank=True, related_name='animals')
     country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True, blank=True)
-    placement = models.ForeignKey(Placement, on_delete=models.SET_NULL, null=True, blank=True, related_name='animals')
+    placement = models.ForeignKey(Placement, on_delete=models.PROTECT, null=True, blank=True, related_name='animals')
     fodder = models.ForeignKey(Fodder, on_delete=models.SET_NULL, null=True, blank=True)
     admission_date = models.DateField(null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)

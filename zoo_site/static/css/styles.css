@@ -6,6 +6,7 @@ header, footer {
     width: 5%;
     height: auto;
     margin: 10px;
+    margin-bottom: 20px;
 }
 
 .mini-icon {
@@ -26,6 +27,7 @@ header, footer {
     border-radius: 20px;
     padding: 8px;
     margin: 5px;
+    margin-right: 7px;
     transition: font-size 0.2s;
 }
 
@@ -40,7 +42,7 @@ header, footer {
 
 .image-container {
     width: 1100px;
-    height: 450px;
+    height: 350px;
     overflow: hidden;
     position: relative;
 }
@@ -128,6 +130,24 @@ header, footer {
     }
 }
 
+ .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
 
+.grid-item {
+    text-align: center;
+}
 
+a {
+    color: #d3430f;
+}
 
+a:hover {
+    color: #d3430f;
+}
+
+a:pressed {
+    color: #d3430f;
+}

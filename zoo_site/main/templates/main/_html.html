@@ -3,16 +3,37 @@
 {% block title %}HTML things{% endblock %}
 
 {% block content %}
+
     <h1>HTML things</h1>
 
-    <h5>Listing</h5>
-    <pre>
+    <article>
+        <h4>Listing</h4>
         <code>
             def function():
                 print('Hello, world!')
         </code>
-    </pre>
+    </article>
 
-    <h5>Abbreviation</h5>
+    <article>
+        <h4>Abbreviation and Definition</h4>
+        <dl>
+            <dt>
+                <abbr title="Hypertext Markup Language">
+                    HTML
+                </abbr>
+            </dt>
+            <dd>Hypertext Markup Language</dd>
+        </dl>
+    </article>
+
+    <article>
+        <h4>Quatrain</h4>
+        <p>
+            Good morning, Good morning,<br>
+            And how do you do?<br>
+            Good morning, Good morning,<br>
+            I’m fine, how are you?
+        </p>
+    </article>
 
 {% endblock %}

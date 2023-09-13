@@ -26,7 +26,7 @@ urlpatterns = [
     path('placements/<int:pk>/edit/', views.PlacementUpdate.as_view(), name='edit_placement'),
     path('placements/add/', views.PlacementCreate.as_view(), name='add_placement'),
     path('placements/<int:pk>/delete/', views.PlacementDelete.as_view(), name='delete_placement'),
-    path('<int:pk>/password/', PasswordChangeView.as_view(success_url='/main/personal/'), name='password_change'),
+    path('<int:id>/password/', PasswordChangeView.as_view(success_url='/main/personal/'), name='password_change'),
     path('diagram/', views.DiagramView.as_view(), name='diagram'),
     path('static_info/', views.StaticInfoView.as_view(), name='static_info'),
     path('about_us/', views.AboutUsView.as_view(), name='about_us'),

@@ -1,11 +1,12 @@
 from django.contrib.auth import login
 from django.core.validators import RegexValidator
+from django.db.models import ProtectedError
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import generic
 from .models import Animal, Placement, Staffer, Fodder, Vacancy, Review, Question, Article, Coupon, Client
-from django.http import Http404
+from django.http import Http404, HttpResponseServerError
 import requests
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -193,16 +194,31 @@ class PersonalAccountView(View):
 class UserProfileView(View):
     @staticmethod
     def get(request):
-        try:
-            staffer = Staffer.objects.get(username=request.user.username)
-        except Staffer.DoesNotExist:
-            raise Http404("Staffer doesn't exist :(")
 
-        return render(
-            request,
-            'main/staffer_detail.html',
-            context={'staffer': staffer, }
-        )
+        if not Client.objects.filter(username=request.user.username).exists():
+            try:
+                staffer = Staffer.objects.get(username=request.user.username)
+            except Staffer.DoesNotExist:
+                raise Http404("Staffer doesn't exist :(")
+
+            return render(
+                request,
+                'main/staffer_detail.html',
+                context={'staffer': staffer,
+                         'email': request.user.email, }
+            )
+        else:
+            try:
+                client = Client.objects.get(username=request.user.username)
+            except Client.DoesNotExist:
+                raise Http404("Client doesn't exist :(")
+
+            return render(
+                request,
+                'main/client_detail.html',
+                context={'client': client,
+                         'email': request.user.email, }
+            )
 
 
 @method_decorator(login_required, name='dispatch')
@@ -399,6 +415,8 @@ class PlacementDelete(DeleteView):
             self.request.session['last_change'] = formatted_datetime()
 
             return response
+        except ProtectedError:
+            return HttpResponseServerError("You can't do this!!!")
         except Exception:
             logger.error(f'Failed to delete placement by {self.request.user.username}!')
             raise

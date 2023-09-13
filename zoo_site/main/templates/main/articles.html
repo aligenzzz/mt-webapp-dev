@@ -3,19 +3,26 @@
 {% block title %}News{% endblock %}
 
 {% block content %}
+    {% load static %}
+
     <h1>News</h1>
+
     {% if article_list %}
     <ul>
         {% for article in article_list %}
-            <li itemscope itemtype="https://schema.org/Article" style="margin: 10px;">
-                <img itemprop="image" src="{{ article.image }}" style="max-width: 200px;">
-                <h2 itemprop="name">{{ article.title }}</h2>
-                <small itemprop="datePublished">{{ article.date }}</small>
-                <p itemprop="description">{{ article.short_description }}</p>
-                <a href="/main/articles/{{ article.id }}">Read more...</a>
+            <li style="margin: 20px;">
+                <article itemscope itemtype="https://schema.org/Article" style="margin: 10px;">
+                    <img itemprop="image" src="{{ article.image }}" style="max-width: 200px;"
+                         alt="Article's image">
+                    <h2 itemprop="name">{{ article.title }}</h2>
+                    <small itemprop="datePublished">{{ article.date }}</small>
+                    <p itemprop="description">{{ article.short_description }}</p>
+                    <a href="{% url 'article' id=article.id %}">Read more...</a>
+                </article>
             </li>
         {% endfor %}
     </ul>
+
     {% else %}
         <p>There are no articles.</p>
     {% endif %}

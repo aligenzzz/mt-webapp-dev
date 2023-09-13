@@ -3,21 +3,27 @@
 {% block title %}Our vacancies{% endblock %}
 
 {% block content %}
-    <h1>Our vacancies</h1>
-    {% if vacancy_list %}
-    <ul>
-        {% for vacancy in vacancy_list %}
-        <li itemscope itemtype="https://schema.org/JobPosting">
-            <h3 itemprop="name">{{ vacancy }}</h3>
-            <h4>Count: {{ vacancy.count }}</h4>
-            <h4>Description:</h4>
-            <p itemprop="description">{{ vacancy.post.description }}</p>
-            <h4>Requirements:</h4>
-            <p itemprop="experienceRequirements">{{ vacancy.post.requirements }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p>There are no vacancies in the zoo.</p>
-    {% endif %}
+    <section>
+        <h1>Our vacancies</h1>
+
+        {% if vacancy_list %}
+        <ul>
+            {% for vacancy in vacancy_list %}
+            <li >
+                <article itemscope itemtype="https://schema.org/JobPosting">
+                    <h3 itemprop="name"><mark>{{ vacancy }}</mark></h3>
+                    <h4>Count: {{ vacancy.count }}</h4>
+                    <h4>Description:</h4>
+                    <p itemprop="description">{{ vacancy.post.description }}</p>
+                    <h4>Requirements:</h4>
+                    <p itemprop="experienceRequirements">{{ vacancy.post.requirements }}</p>
+                </article>
+            </li>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+            <p>There are no vacancies in the zoo.</p>
+        {% endif %}
+    </section>
 {% endblock %}

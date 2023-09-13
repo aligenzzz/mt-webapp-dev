@@ -3,16 +3,20 @@
 {% block title %}All staff{% endblock %}
 
 {% block content %}
+  {% load static %}
+
   <h1>All staff</h1>
+
   {% if staff_list %}
     <ul>
       {% for staffer in staff_list %}
-      <li>
-        <a href="/main/staff/{{ staffer.id }}">{{ staffer }}</a>
-      </li>
+        <li>
+          <a href="{% url 'staffer' id=staffer.id %}">{{ staffer }}</a>
+        </li>
       {% endfor %}
     </ul>
-    {% else %}
-      <p>There are no staff in the zoo.</p>
-    {% endif %}
+
+  {% else %}
+    <p>There are no staff in the zoo.</p>
+  {% endif %}
 {% endblock %}

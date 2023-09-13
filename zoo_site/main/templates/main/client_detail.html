@@ -1,0 +1,14 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Client Details{% endblock %}
+
+{% block content %}
+    <article>
+        <h1>Client Details</h1>
+        <ul itemscope itemtype="https://schema.org/Person">
+            <li itemprop="name">Name: {{ client.name }}</li>
+            <li itemprop="telephone">Phone number: {{ client.phone_number }}</li>
+            <li itemprop="email">E-mail: {{ email }}</li>
+        </ul>
+    </article>
+{% endblock %}

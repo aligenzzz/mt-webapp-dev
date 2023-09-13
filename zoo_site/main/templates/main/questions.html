@@ -4,20 +4,24 @@
 
 {% block content %}
     <h1>Questions and answers</h1>
+
     {% if question_list %}
     <ul>
         {% for question in question_list %}
-        <li itemscope itemtype="https://schema.org/Question">
-            <details>
-            <summary><h3 itemprop="name">{{ question.question }}</h3></summary>
-              <p>
+        <li>
+            <article itemscope itemtype="https://schema.org/Question">
+                <details>
+                <summary><h3 itemprop="name">{{ question.question }}</h3></summary>
+                <p>
                   <span itemprop="suggestedAnswer">{{ question.answer }}</span><br>
                   <small itemprop="datePublished">{{ question.date }}</small><br>
-              </p>
-          </details>
+                </p>
+                </details>
+            </article>
       </li>
       {% endfor %}
     </ul>
+
     {% else %}
       <p>There are no questions.</p>
     {% endif %}

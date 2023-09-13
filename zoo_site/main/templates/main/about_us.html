@@ -4,21 +4,52 @@
 
 {% block content %}
   {% load static %}
-  <h1>About us</h1>
-  <h2>Basic information</h2>
-  <p>{{ basic_information }}</p>
-  <h2>Our history</h2>
-  <p>{{ our_history }}</p>
-  <h2>Video</h2>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/W2W6ZoaSAzc?autoplay=1"
-          frameborder="0" allowfullscreen></iframe>
-  <h2>Audio</h2>
-  <audio controls>
-        <source src="{% static 'audio/birds_singing.mp3' %}">
-  </audio>
-  <h2>Documents</h2>
 
-  <img src="{% static 'img/certificate.jpg' %}"/>
-  <a href="{% static 'img/certificate.jpg' %}" download>Download</a>
+  <h1>About us</h1>
+
+  <ul>
+    <li><a href="#basic_information">Basic information</a></li>
+    <li><a href="#history">Our history</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#audio">Audio</a></li>
+    <li><a href="#documents">Documents</a></li>
+  </ul>
+
+  <article id="basic_information">
+    <h2 >Basic information</h2>
+    <p>{{ basic_information }}</p>
+  </article>
+
+  <article id="history">
+    <h2>Our history</h2>
+    <p>{{ our_history }}</p>
+  </article>
+
+  <article id="video">
+    <h2>Video</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/W2W6ZoaSAzc?autoplay=1"
+          frameborder="0" allowfullscreen>
+      Video
+    </iframe>
+  </article>
+
+  <article id="audio">
+    <h2 >Audio</h2>
+    <audio controls>
+      <source src="{% static 'audio/birds_singing.mp3' %}">
+      Audio
+    </audio>
+  </article>
+
+  <article id="documents">
+    <h2>Documents</h2>
+    <figure>
+      <img src="{% static 'img/certificate.jpg' %}"/>
+      <figcaption>Our certificate</figcaption>
+    </figure>
+    <a href="{% static 'img/certificate.jpg' %}" download>
+      Download
+    </a>
+  </article>
 
 {% endblock %}

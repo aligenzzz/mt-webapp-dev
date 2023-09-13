@@ -3,36 +3,25 @@
 {% block title %}Coupons{% endblock %}
 
 {% block content %}
-  <style>
-    .coupon-list {
-        column-count: 3;
-        column-gap: 10px;
-        row-gap: 10px;
-        padding: 0;
-    }
+  {% load static %}
 
-    .coupon-list li {
-        display: block;
-        width: 60%;
-        height: 50%;
-    }
-  </style>
+  <section>
+    <h1>Coupons</h1>
 
-  <h1>Coupons</h1>
-  <div class="coupon-list">
     {% if coupon_list %}
-      <ul>
-        {% for coupon in coupon_list %}
-        <li>
-          <div style="border: 2px solid {% if coupon.is_active %} green; {% else %} red; {% endif %} padding: 20px;">
+    <div class="grid-container">
+      {% for coupon in coupon_list %}
+        <div class="gris-item">
+          <article style="border: 2px solid {% if coupon.is_active %} green; {% else %} red; {% endif %} padding: 20px;">
             <h2>{{ coupon.discount }}%</h2>
             <small>{{ coupon.description }}</small>
-          </div>
-        </li>
-      </ul>
+          </article>
+        </div>
       {% endfor %}
-    {% else %}
-      <p>There are no coupons.</p>
-    {% endif %}
-  </div>
+    </div>
+
+      {% else %}
+        <p>There are no coupons.</p>
+      {% endif %}
+  </section>
 {% endblock %}

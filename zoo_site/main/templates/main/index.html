@@ -17,6 +17,7 @@
         }
         setInterval(updateDateTime, 1000);
     </script>
+
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     {% load static %}
@@ -29,11 +30,11 @@
         <p style="text-align:center; color: white;" id="current-datetime"></p>
     </div>
 
-    <header>
+    <header style="padding-bottom: 20px; margin-bottom: 10px;">
         <div class="container">
             <nav>
                 <div class="navbar-nav">
-                    <img class="icon" src="{% static 'img/icon.png' %}">
+                    <img class="icon" src="{% static 'img/icon.png' %}" alt="icon">
                     <a class="menu-item" href="{% url 'home' %}">Home</a>
                     <a class="menu-item" href="{% url 'news' %}">News</a>
                     <a class="menu-item" href="{% url 'animals' %}">All animals</a>
@@ -62,60 +63,92 @@
 
     <main class="container">
         {% block content %}
-        <div class="container">
-            <h1>ZOO HOME</h1>
+        <section>
             <div class="image-container">
-                <img src="{% static 'img/banner1.png' %}">
-                <img src="{% static 'img/banner2.png' %}">
-                <img src="{% static 'img/banner3.png' %}">
-                <img src="{% static 'img/banner4.png' %}">
-            </div>
-            <p>Welcome to our <em>Zoo</em>!</p>
-            <p>You can read <a href="{% url 'about_us' %}">about us</a></p>
-
-            <div style="margin: 10 px;">
-                <h1>Latest article</h1>
-                <img src="{{ latest_article.image }}" style="max-width: 200px;">
-                <h2>{{ latest_article.title }}</h2>
-                <small>{{ latest_article.date }}</small>
-                <p>{{ latest_article.short_description }}</p>
-                <a href="/main/articles/{{ latest_article.id }}">Read more...</a>
+                <img src="{% static 'img/banner1.png' %}" alt="Banner #1">
+                <img src="{% static 'img/banner2.png' %}" alt="Banner #2">
+                <img src="{% static 'img/banner3.png' %}" alt="Banner #3">
+                <img src="{% static 'img/banner4.png' %}" alt="Banner #4">
             </div>
 
-            <p><em>Random fact about cats: </em>{{ fact }}</p>
-            <img class="simple-image" src="{{ image_url }}" alt="Such image doesn't exist :(">
-        </div>
+            <div align="center" style="margin: 20px;">
+                <p style="font-size: 20px;">Welcome to our <em>Zoo</em>!</p>
+                <p style="font-size: 20px;">You can read
+                    <a href="{% url 'about_us' %}">about us</a>
+                </p>
+            </div>
+
+            <table>
+                <tr>
+                    <td>
+                        <div align="center">
+                            <h2>Latest article</h2>
+                            <img src="{{ latest_article.image }}" style="max-width: 200px;"
+                                 alt="The latest article's image">
+                            <h3>{{ latest_article.title }}</h3>
+                            <small>{{ latest_article.date }}</small>
+                            <p>{{ latest_article.short_description }}</p>
+                            <a href="{% url 'article' id=latest_article.id %}">
+                                Read more...
+                            </a>
+                        </div>
+                    </td>
+
+                    <td>
+                        <article>
+                            <p style="font-size: 20px;"><em>Random fact about cats: </em><q>{{ fact }}</q></p>
+                            <img style="max-width: 300px; max_height: 300px;" src="{{ image_url }}" alt="Dog's image">
+                        </article>
+                    </td>
+                </tr>
+            </table>
+
+        </section>
         {% endblock %}
     </main>
 
-    <footer style="margin-top: 10px;">
-        <div style="color: white">
-            <ul style="list-style-type: none;">
-                <li>
+    <footer style="margin-top: 20px;">
+        <table align="center" style="color: white">
+            <tr>
+                <td align="center"><p>Our partners:</p></td>
+                <td align="right">
                     <img class="mini-icon" src="{% static 'img/phone-icon.png' %}"/>
-                    <a href="tel:+375298225999" target="_blank">+375 (29) 822-59-99</a>
-                </li>
-                <li>
+                    <a style="color: white;" href="tel:+375298225999" target="_blank">+375 (29) 822-59-99</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td rowspan="2" align="center">
+                    <a target="_blank" href="https://afisha.relax.by/">
+                        <img style="width: 30%;" src="{% static 'img/partner1.png' %}">
+                    </a>
+                    <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
+                        <img style="width: 30%;" src="{% static 'img/partner2.png' %}">
+                    </a>
+                </td>
+                <td align="right">
                     <img class="mini-icon" src="{% static 'img/address-icon.png' %}"/>
-                    <a href="https://maps.google.com/maps?q=10+Petrusya+Brovki+street,+Minsk,+Belarus" target="_blank">
+                    <a style="color: white;" href="https://maps.google.com/maps?q=10+Petrusya+Brovki+street,+Minsk,+Belarus"
+                       target="_blank">
                         Minsk, Petrusya Brovki str., 10
                     </a>
-                </li>
-                <li>
-                    <img class="mini-icon" src="{% static 'img/email-icon.png' %}"/>
-                    <a href="mailto:aap_zoo@gmail.com" target="_blank">aap_zoo@gmail.com</a>
-                </li>
-            </ul>
-            <a href="{% url 'privacy_policy' %}">Privacy policy</a>
-            <p>&copy; 2023 Zoo "Animal Adventure Park". All rights reserved.</p>
-        </div>
+                </td>
+            </tr>
 
-        <a target="_blank" href="https://afisha.relax.by/">
-            <img class="mini-icon" src="{% static 'img/partner1.png' %}">
-        </a>
-        <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
-            <img class="mini-icon" src="{% static 'img/partner2.png' %}">
-        </a>
+            <tr>
+                <td align="right">
+                    <img class="mini-icon" src="{% static 'img/email-icon.png' %}"/>
+                    <a style="color: white;" href="mailto:aap_zoo@gmail.com" target="_blank">aap_zoo@gmail.com</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <a style="color: white;" href="{% url 'privacy_policy' %}">Privacy policy</a>
+                    <p>&copy; 2023 Zoo "Animal Adventure Park". All rights reserved.</p>
+                </td>
+            </tr>
+        </table>
     </footer>
 </body>
 </html>
