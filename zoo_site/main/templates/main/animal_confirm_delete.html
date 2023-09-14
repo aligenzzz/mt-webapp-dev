@@ -7,7 +7,7 @@
 
   <p>Are you sure you want to delete the animal: {{ animal }}?</p>
 
-  <form action="" method="POST">
+  <form method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes, delete."/>
   </form>

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login
 from django.core.validators import RegexValidator
 from django.db.models import ProtectedError
@@ -6,7 +7,7 @@ from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import generic
 from .models import Animal, Placement, Staffer, Fodder, Vacancy, Review, Question, Article, Coupon, Client
-from django.http import Http404, HttpResponseServerError
+from django.http import Http404, HttpResponseServerError, HttpResponse, HttpResponseBadRequest
 import requests
 from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -22,6 +23,42 @@ from django.utils.decorators import method_decorator
 
 
 logger = logging.getLogger(__name__)
+
+
+def is_client(view_func):
+    def wrapper(request, *args, **kwargs):
+        username = request.user.username
+        clients = list(Client.objects.values_list('username', flat=True))
+
+        if username not in clients:
+            return HttpResponseBadRequest('You are not client!')
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
+
+
+def is_staffer(view_func):
+    def wrapper(request, *args, **kwargs):
+        username = request.user.username
+        staff = list(Staffer.objects.values_list('username', flat=True))
+
+        if username not in staff:
+            return HttpResponseBadRequest('You are not staffer!')
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
+
+
+def not_superuser(view_func):
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_superuser:
+            return HttpResponseBadRequest('You are superuser!')
+
+        return view_func(request, *args, **kwargs)
+
+    return wrapper
 
 
 class HomeView(View):
@@ -181,6 +218,7 @@ class StafferPlacementsView(generic.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(not_superuser, name='dispatch')
 class PersonalAccountView(View):
     @staticmethod
     def get(request):
@@ -191,6 +229,7 @@ class PersonalAccountView(View):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(not_superuser, name='dispatch')
 class UserProfileView(View):
     @staticmethod
     def get(request):
@@ -222,6 +261,7 @@ class UserProfileView(View):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class UserAnimalsView(generic.ListView):
     model = Animal
     context_object_name = 'animal_list'
@@ -233,6 +273,7 @@ class UserAnimalsView(generic.ListView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class UserPlacementsView(generic.ListView):
     model = Placement
     context_object_name = 'placement_list'
@@ -273,6 +314,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class AnimalCreate(CreateView):
     model = Animal
     fields = ['name', 'species', 'animal_class', 'country', 'placement', 'fodder',
@@ -308,30 +350,51 @@ class AnimalCreate(CreateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class AnimalUpdate(UpdateView):
-    model = Animal
-    fields = ['placement', 'image', 'info', 'fodder', 'daily_feed']
-    success_url = reverse_lazy('user_animals')
+@method_decorator(is_staffer, name='dispatch')
+class AnimalUpdate(View):
+    @staticmethod
+    def get(request, pk):
+        animal = Animal.objects.filter(id=pk).first()
+        placements = Placement.objects.all()
+        fodders = Fodder.objects.all()
 
-    def form_valid(self, form):
-        if form.cleaned_data['daily_feed'] <= 0:
-            form.add_error(None, 'Animal with daily_feed <= 0.')
-            logger.error(f'Failed to update animal by {self.request.user.username}!')
-            return self.form_invalid(form)
+        context = {
+            'animal': animal,
+            'placements': placements,
+            'fodders': fodders,
+        }
+
+        return render(request, 'main/animal_edit_form.html', context)
+
+    @staticmethod
+    def post(request, pk):
+        form = request.POST
+
+        if float(form['daily_feed']) <= 0:
+            messages.error(request, 'Animal with daily_feed <= 0.')
+            logger.error(f'Failed to update animal by {request.user.username}!')
+            return redirect('edit_animal', pk=pk)
 
         try:
-            response = super().form_valid(form)
+            animal = Animal.objects.filter(id=pk).first()
+            animal.placement = Placement.objects.filter(id=form['placement']).first()
+            animal.image = form['image']
+            animal.info = form['info']
+            animal.fodder = Fodder.objects.filter(id=form['fodder']).first()
+            animal.daily_feed = float(form['daily_feed'])
+            animal.save()
 
-            logger.info(f'Animal was updated successfully by {self.request.user.username}.')
-            self.request.session['last_change'] = formatted_datetime()
+            logger.info(f'Animal was updated successfully by {request.user.username}.')
+            request.session['last_change'] = formatted_datetime()
 
-            return response
+            return redirect('animal', id=pk)
         except Exception:
-            logger.error(f'Failed to update animal by {self.request.user.username}!')
+            logger.error(f'Failed to update animal by {request.user.username}!')
             raise
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class AnimalDelete(DeleteView):
     model = Animal
     success_url = reverse_lazy('user_animals')
@@ -350,6 +413,7 @@ class AnimalDelete(DeleteView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class PlacementCreate(CreateView):
     model = Placement
     fields = ['name', 'number', 'basin', 'area']
@@ -379,6 +443,7 @@ class PlacementCreate(CreateView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class PlacementUpdate(UpdateView):
     model = Placement
     fields = ['basin', 'area']
@@ -403,6 +468,7 @@ class PlacementUpdate(UpdateView):
 
 
 @method_decorator(login_required, name='dispatch')
+@method_decorator(is_staffer, name='dispatch')
 class PlacementDelete(DeleteView):
     model = Placement
     success_url = reverse_lazy('user_placements')
@@ -620,6 +686,7 @@ def registration(request):
     return render(request, 'registration/registration.html', {'form': form})
 
 
+@method_decorator(is_client, name='dispatch')
 class ReviewCreate(CreateView):
     model = Review
     fields = ['rating', 'content']
@@ -634,7 +701,7 @@ class ReviewCreate(CreateView):
             review.username = self.request.user.username
             review.save()
 
-            logger.info(f'Placement was created successfully by {self.request.user.username}.')
+            logger.info(f'Review was created successfully by {self.request.user.username}.')
             self.request.session['last_change'] = formatted_datetime()
 
             return super().form_valid(form)

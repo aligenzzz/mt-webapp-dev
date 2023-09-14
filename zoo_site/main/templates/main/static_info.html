@@ -7,12 +7,33 @@
 
    <article>
       <h1>Static Info</h1>
-      <ul>
-         <li><em>Count of animals: </em>{{ animals_count }}</li>
-         <li><em>Count of placements: </em>{{ placements_count }}</li>
-         <li><em>Count of staff: </em>{{ staff_count }}</li>
-         <li><em>New animal: </em><a href="{% url 'animal' id=animal.id %}">{{ animal }}</a></li>
-         <li><em>The most consumed fodder: </em>{{ fodder_name }}</li>
-      </ul>
+      <table border="1">
+         <tr>
+            <th id="criterion">Criterion</th>
+            <th id="animals">Animals</th>
+            <th id="placements">Placements</th>
+            <th id="staff">Staff</th>
+         </tr>
+         <tr>
+            <th id="count" headers="criterion"><em>Count of...</em></th>
+            <td headers="animals count" align="center">{{ animals_count }}</td>
+            <td headers="placements count" align="center">{{ placements_count }}</td>
+            <td headers="staff count" align="center">{{ staff_count }}</td>
+         </tr>
+         <tr>
+            <th id="new_animal" headers="criterion"><em>New animal:</em></th>
+            <td colspan="3" headers="new_animal" align="center">
+               <a href="{% url 'animal' id=animal.id %}">{{ animal }}</a>
+            </td>
+         </tr>
+         <tr>
+            <th id="most_consumed_fond" headers="criterion">
+               <em>The most consumed fodder:</em>
+            </th>
+            <td colspan="3" headers="most_consumed_fond" align="center">
+               {{ fodder_name }}
+            </td>
+         </tr>
+      </table>
    </article>
 {% endblock %}

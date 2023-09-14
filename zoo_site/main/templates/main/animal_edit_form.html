@@ -1,0 +1,53 @@
+{% extends 'main/index.html' %}
+
+{% block title %}Edit/add animal{% endblock %}
+
+{% block content %}
+    <h1>Edit/add animal</h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="placement">Placement:</label>
+        <select id="placement" name="placement">
+            {% for placement in placements %}
+            <option value="{{ placement.id }}"
+                {% if animal.placement.id == placement.id %}
+                    selected {% endif %}>
+                {{ placement }}
+            </option>
+            {% endfor %}
+        </select><br>
+
+        <label for="image">Image:</label>
+        <input type="url" id="image" name="image" value="{{ animal.image }}"><br>
+
+        <label for="info">Info:</label>
+        <textarea id="info" name="info">{{ animal.info }}</textarea><br>
+
+        <label for="fodder">Fodder:</label>
+        <select id="fodder" name="fodder">
+            {% for fodder in fodders %}
+                <option value="{{ fodder.id }}"
+                    {% if animal.fodder.id == fodder.id %}
+                        selected
+                    {% endif %}>
+                    {{ fodder }}
+                </option>
+            {% endfor %}
+        </select><br>
+
+          <label for="daily_feed">Daily Feed:</label>
+          <input type="number" id="daily_feed" name="daily_feed" step="0.01" value="{{ animal.daily_feed }}"><br>
+
+          <input type="submit" value="Update">
+    </form>
+
+{% endblock %}

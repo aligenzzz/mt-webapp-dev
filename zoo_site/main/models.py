@@ -152,6 +152,7 @@ class Question(models.Model):
     class Meta:
         verbose_name = "Question"
         verbose_name_plural = "Questions"
+        ordering = ['-date']
 
     def __str__(self):
         return f'Question #{self.id}'
@@ -169,6 +170,7 @@ class Review(models.Model):
     class Meta:
         verbose_name = "Review"
         verbose_name_plural = "Reviews"
+        ordering = ['-date']
 
     def __str__(self):
         return f'Review #{self.id}'
@@ -184,19 +186,24 @@ class Article(models.Model):
     class Meta:
         verbose_name = "Article"
         verbose_name_plural = "Articles"
+        ordering = ['-date', 'title']
 
     def __str__(self):
         return f'Article #{self.id}'
 
 
 class Coupon(models.Model):
-    discount = models.PositiveIntegerField(default=0, null=False, blank=False)
+    discount = models.PositiveIntegerField(default=0, null=False, blank=False, validators=[
+            MinValueValidator(10, message="The discount cannot be < 10"),
+            MaxValueValidator(100, message="The discount cannot be > 100"),
+        ])
     description = models.CharField(max_length=100, null=True, blank=True)
     is_active = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Coupon"
         verbose_name_plural = "Coupons"
+        ordering = ['-discount', '-is_active']
 
     def __str__(self):
         return f'Coupon #{self.id}'

@@ -97,29 +97,37 @@ class FodderAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'phone_number', 'username')
+    search_fields = ['^name']
 
 
 @admin.register(Vacancy)
 class VacancyAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('post', 'count')
+    list_filter = ('count',)
 
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('question', 'answer', 'date')
+    list_filter = ('date',)
+    search_fields = ['^question']
 
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('rating', 'username', 'date')
+    list_filter = ('rating', 'date')
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'short_description', 'date')
+    list_filter = ('date',)
+    search_fields = ['^title']
 
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('discount', 'description', 'is_active')
+    list_filter = ('discount', 'description', 'is_active')
