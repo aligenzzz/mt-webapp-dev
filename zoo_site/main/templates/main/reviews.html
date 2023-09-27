@@ -7,21 +7,20 @@
     {% load filters %}
 
     <section>
-        <h1>Reviews</h1>
+        <h1 class="centerable">Reviews</h1>
 
         {% if user.is_authenticated %}
             {% if user.username|is_client %}
-                <a href="{% url 'add_review' %}">Leave a review...</a>
+                <a class="centerable" href="{% url 'add_review' %}">Leave a review...</a>
             {% endif %}
         {% else %}
-            <a href="{% url 'registration' %}">Leave a review...</a>
+            <a class="centerable" href="{% url 'registration' %}">Leave a review...</a>
         {% endif %}
 
         {% if review_list %}
-        <ul>
+        <div class="grid-container borderable">
             {% for review in review_list %}
-            <li>
-                <article itemscope itemtype="https://schema.org/Review">
+                <article class="grid-item" itemscope itemtype="https://schema.org/Review">
                     <h3 itemprop="reviewRating">{{ review.rating }}/10</h3>
                     <time>
                         <small itemprop="datePublished">{{ review.date }}</small>
@@ -29,9 +28,8 @@
                     <p itemprop="text">{{ review.content }}</p>
                     <small itemprop="author">{{ review.username }}</small>
                 </article>
-            </li>
             {% endfor %}
-        </ul>
+        </div>
         
         {% else %}
             <p>There are no reviews.</p>

@@ -3,24 +3,22 @@
 {% block title %}Questions{% endblock %}
 
 {% block content %}
-    <h1>Questions and answers</h1>
+    <h1 class="centerable">Questions and answers</h1>
 
     {% if question_list %}
-    <ul>
+    <div class="grid-container">
         {% for question in question_list %}
-        <li>
-            <article itemscope itemtype="https://schema.org/Question">
+            <article class="grid-item borderable" style="text-align: start;" itemscope itemtype="https://schema.org/Question">
                 <details>
-                <summary><h3 itemprop="name">{{ question.question }}</h3></summary>
+                <summary class="question" itemprop="name">{{ question.question }}</summary>
                 <p>
                   <span itemprop="suggestedAnswer">{{ question.answer }}</span><br>
                   <small itemprop="datePublished">{{ question.date }}</small><br>
                 </p>
                 </details>
             </article>
-      </li>
-      {% endfor %}
-    </ul>
+        {% endfor %}
+    </div>
 
     {% else %}
       <p>There are no questions.</p>

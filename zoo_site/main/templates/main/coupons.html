@@ -6,20 +6,17 @@
   {% load static %}
 
   <section>
-    <h1>Coupons</h1>
+    <h1 class="centerable">Coupons</h1>
 
     {% if coupon_list %}
-    <div class="grid-container">
+    <div class="grid-container borderable">
       {% for coupon in coupon_list %}
-        <div class="gris-item">
-          <article style="border: 2px solid {% if coupon.is_active %} green; {% else %} red; {% endif %} padding: 20px;">
-            <h2>{{ coupon.discount }}%</h2>
-            <small>{{ coupon.description }}</small>
-          </article>
+        <div class="grid-item coupon" style="--border-color: {% if coupon.is_active %} green {% else %} red {% endif %}">
+          <h2>{{ coupon.discount }}%</h2>
+          <small>{{ coupon.description }}</small>
         </div>
       {% endfor %}
     </div>
-
       {% else %}
         <p>There are no coupons.</p>
       {% endif %}

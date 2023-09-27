@@ -1,30 +1,29 @@
 {% extends 'main/index.html' %}
 
-{% block title %}All animals{% endblock %}
+{% block title %}Animals{% endblock %}
 
 {% block content %}
   {% load static %}
   {% load filters %}
 
-  <form method="GET" action="{% url 'animals' %}">
-    {{ search_form.as_p }}
-    <button type="submit">Search</button>
-  </form>
-
   <section>
-    <h1>All animals</h1>
+    <h1 class="centerable">All animals</h1>
 
     {% if user.is_authenticated and not user.username|is_client %}
-      <p><a href="{% url 'add_animal' %}">Add</a></p>
+      <p class="centerable"><a href="{% url 'add_animal' %}">Add</a></p>
     {% endif %}
 
+    <form class="centerable" method="GET" action="{% url 'animals' %}">
+      <span style="flex: left;">{{ search_form.as_p }}</span>
+      <button type="submit">Search</button>
+    </form>
+
       {% if animal_list %}
-      <div class="grid-container">
+      <div class="grid-container" style="--column-count: 4">
         {% for animal in animal_list %}
         <div class="grid-item">
-          <figure style="margin: 10px;">
-            <img src="{{ animal.image }}" alt="Animal's image" style="max-width: 150px;
-                                                                                 max-height: 100px;">
+          <figure class="photo-card">
+            <img src="{{ animal.image }}" alt="Animal's image">
             <figcaption>
               <a href="{% url 'animal' id=animal.id %}">{{ animal.name }}</a>
             </figcaption>
