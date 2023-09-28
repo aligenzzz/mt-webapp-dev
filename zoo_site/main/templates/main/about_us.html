@@ -4,51 +4,50 @@
 
 {% block content %}
   {% load static %}
+  <section>
+      <h1 class="center">About us</h1>
+      <ul class="list-box">
+        <li><span>01</span><a href="#basic_information">Basic information</a></li>
+        <li><span>02</span><a href="#history">Our history</a></li>
+        <li><span>03</span><a href="#video">Video</a></li>
+        <li><span>04</span><a href="#audio">Audio</a></li>
+        <li><span>05</span><a href="#documents">Documents</a></li>
+      </ul>
 
-  <h1>About us</h1>
+      <article id="basic_information">
+        <h2>Basic information</h2>
+        <p>{{ basic_information }}</p>
+      </article>
 
-  <ul>
-    <li><a href="#basic_information">Basic information</a></li>
-    <li><a href="#history">Our history</a></li>
-    <li><a href="#video">Video</a></li>
-    <li><a href="#audio">Audio</a></li>
-    <li><a href="#documents">Documents</a></li>
-  </ul>
+      <article id="history">
+        <h2>Our history</h2>
+        <p>{{ our_history }}</p>
+      </article>
 
-  <article id="basic_information">
-    <h2 >Basic information</h2>
-    <p>{{ basic_information }}</p>
-  </article>
+      <article id="video">
+        <h2>Video</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/W2W6ZoaSAzc?autoplay=1"
+              frameborder="0" allowfullscreen title="Video">
+        </iframe>
+      </article>
 
-  <article id="history">
-    <h2>Our history</h2>
-    <p>{{ our_history }}</p>
-  </article>
+      <article id="audio">
+        <h2 >Audio</h2>
+        <audio controls>
+          <source src="{% static 'audio/birds_singing.mp3' %}">
+          Audio
+        </audio>
+      </article>
 
-  <article id="video">
-    <h2>Video</h2>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/W2W6ZoaSAzc?autoplay=1"
-          frameborder="0" allowfullscreen title="Video">
-    </iframe>
-  </article>
-
-  <article id="audio">
-    <h2 >Audio</h2>
-    <audio controls>
-      <source src="{% static 'audio/birds_singing.mp3' %}">
-      Audio
-    </audio>
-  </article>
-
-  <article id="documents">
-    <h2>Documents</h2>
-    <figure>
-      <img src="{% static 'img/certificate.jpg' %}"/>
-      <figcaption>Our certificate</figcaption>
-    </figure>
-    <a href="{% static 'img/certificate.jpg' %}" download>
-      Download
-    </a>
-  </article>
-
+      <article id="documents">
+        <h2>Documents</h2>
+        <figure>
+          <img src="{% static 'img/certificate.jpg' %}"/>
+          <figcaption>Our certificate</figcaption>
+        </figure>
+        <a href="{% static 'img/certificate.jpg' %}" download>
+          Download
+        </a>
+      </article>
+  </section>
 {% endblock %}

@@ -27,7 +27,7 @@
 <body>
     <header style="padding-bottom: 10px;">
         <div style="width: 100%;">
-<!--            <p style="text-align:center; color: white; font-size: 20px;" id="current-datetime"></p>-->
+            <p style="text-align:center; color: white; font-size: 12px;" id="current-datetime"></p>
             <nav>
                 <div class="flex-div" style="width: 100%;">
                     <img class="icon flex-div-el" src="{% static 'img/icon.png' %}" alt="icon">
@@ -51,7 +51,7 @@
                     {% else %}
                         <a class="menu-item flex-div-el" href="/main/accounts/login/">Personal Account</a>
                     {% endif %}
-                    <a class="menu-item flex-div-el" href="{% url 'html' %}">HTML</a>
+                    <a class="menu-item flex-div-el" href="{% url 'html' %}">HTML/CSS</a>
                 </div>
             </nav>
         </div>
@@ -108,22 +108,26 @@
             <tr>
                 <td align="center"><p>Our partners:</p></td>
                 <td align="right">
-                    <img class="mini-icon" src="{% static 'img/phone-icon.png' %}"/>
+                    <span><img class="mini-icon" src="{% static 'img/phone-icon.png' %}"/></span>
                     <a style="color: white;" href="tel:+375298225999" target="_blank">+375 (29) 822-59-99</a>
                 </td>
             </tr>
 
             <tr>
                 <td rowspan="2" align="center">
-                    <a target="_blank" href="https://afisha.relax.by/">
-                        <img style="width: 30%;" src="{% static 'img/partner1.png' %}">
-                    </a>
-                    <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
-                        <img style="width: 30%;" src="{% static 'img/partner2.png' %}">
-                    </a>
+                    <div class="circle-block">
+                        <a target="_blank" href="https://afisha.relax.by/">
+                            <img src="{% static 'img/partner1.png' %}">
+                        </a>
+                    </div>
+                    <div class="circle-block">
+                        <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
+                            <img src="{% static 'img/partner2.png' %}">
+                        </a>
+                    </div>
                 </td>
                 <td align="right">
-                    <img class="mini-icon" src="{% static 'img/address-icon.png' %}"/>
+                    <span><img class="mini-icon" src="{% static 'img/address-icon.png' %}"/></span>
                     <a style="color: white;" href="https://maps.google.com/maps?q=10+Petrusya+Brovki+street,+Minsk,+Belarus"
                        target="_blank">
                         Minsk, Petrusya Brovki str., 10
@@ -133,7 +137,7 @@
 
             <tr>
                 <td align="right">
-                    <img class="mini-icon" src="{% static 'img/email-icon.png' %}"/>
+                    <span><img class="mini-icon" src="{% static 'img/email-icon.png' %}"/></span>
                     <a style="color: white;" href="mailto:aap_zoo@gmail.com" target="_blank">aap_zoo@gmail.com</a>
                 </td>
             </tr>

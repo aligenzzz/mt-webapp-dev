@@ -5,18 +5,19 @@
 {% block content %}
   {% load static %}
 
-  <h1>All staff</h1>
+  <h1 class="center">All staff</h1>
 
   {% if staff_list %}
-    <ul>
+    <ul class="list-box">
       {% for staffer in staff_list %}
         <li>
+          <span>{{ staffer.id }}</span>
           <a href="{% url 'staffer' id=staffer.id %}">{{ staffer }}</a>
         </li>
       {% endfor %}
     </ul>
 
   {% else %}
-    <p>There are no staff in the zoo.</p>
+    <p class="centerable">There are no staff in the zoo.</p>
   {% endif %}
 {% endblock %}

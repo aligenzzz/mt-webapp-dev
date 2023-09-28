@@ -6,10 +6,10 @@
   {% load static %}
 
   <section>
-    <h1 class="centerable">Coupons</h1>
+    <h1 class="center">Coupons</h1>
 
     {% if coupon_list %}
-    <div class="grid-container borderable">
+    <div class="grid-container indent">
       {% for coupon in coupon_list %}
         <div class="grid-item coupon" style="--border-color: {% if coupon.is_active %} green {% else %} red {% endif %}">
           <h2>{{ coupon.discount }}%</h2>

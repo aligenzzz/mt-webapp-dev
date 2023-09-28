@@ -1,39 +1,87 @@
 {% extends 'main/index.html' %}
 
-{% block title %}HTML things{% endblock %}
+{% block title %}HTML/CSS things{% endblock %}
 
 {% block content %}
+    <script>
+        var link = document.getElementById('visited');
 
-    <h1>HTML things</h1>
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
 
-    <article>
-        <h4>Listing</h4>
-        <code>
-            def function():
-                print('Hello, world!')
-        </code>
-    </article>
+            link.classList.add('visited');
 
-    <article>
-        <h4>Abbreviation and Definition</h4>
-        <dl>
-            <dt>
-                <abbr title="Hypertext Markup Language">
-                    HTML
-                </abbr>
-            </dt>
-            <dd>Hypertext Markup Language</dd>
-        </dl>
-    </article>
+            setTimeout(function() {
+                link.classList.remove('visited');
+            }, 5000);
+        });
+    </script>
 
-    <article>
-        <h4>Quatrain</h4>
-        <p>
-            Good morning, Good morning,<br>
-            And how do you do?<br>
-            Good morning, Good morning,<br>
-            I’m fine, how are you?
-        </p>
-    </article>
+    <style>
+        a[href^="https://"]:not(.visited) {
+            font-weight: bold;
+            font-style: italic;
+        }
+        a[href$=".com"]:not(.visited) {
+            color: black;
+        }
+        .button.primary {
+            background-color: black;
+            color: white;
+        }
+        .visited:visited {
+            color: var(--green-color);
+        }
+        .visited:link {
+            color: var(--orange-color);
+        }
+    </style>
 
+    <section>
+        <h1 class="center">HTML/CSS things</h1>
+        <div class="grid-container">
+            <article class="grid-item">
+                <h3>Listing</h3>
+                <code>
+                    def function():
+                        print('Hello, world!')
+                </code>
+            </article>
+            <article class="grid-item">
+                <h3>Abbreviation and Definition</h3>
+                <dl>
+                    <dt>
+                        <abbr title="Hypertext Markup Language">
+                            HTML
+                        </abbr>
+                    </dt>
+                    <dd>Hypertext Markup Language</dd>
+                </dl>
+            </article>
+            <article class="grid-item">
+                <h3>Quatrain</h3>
+                <p>
+                    Good morning, Good morning,<br>
+                    And how do you do?<br>
+                    Good morning, Good morning,<br>
+                    I’m fine, how are you?
+                </p>
+            </article>
+            <article class="grid-item">
+                <h3>Selectors with beginning/ending substring</h3>
+                <a href="{% url 'home' %}">Reference 1</a>
+                <a href="https://www.youtube.com">Reference 2</a>
+                <a href="https://translate.yandex.ru">Reference 3</a>
+            </article>
+            <article class="grid-item">
+                <h3>Selectors' combination AND</h3>
+                <button class="button primary">Primary Button</button>
+                <button class="button secondary">Secondary Button</button>
+            </article>
+            <article class="grid-item">
+                <h3>Visited and non-visited links</h3>
+                <a class="visited" id="visited" href="https://oz.by/">Link 2</a>
+            </article>
+        </div>
+    </section>
 {% endblock %}

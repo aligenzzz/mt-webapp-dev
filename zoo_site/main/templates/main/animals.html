@@ -7,13 +7,13 @@
   {% load filters %}
 
   <section>
-    <h1 class="centerable">All animals</h1>
+    <h1 class="center">All animals</h1>
 
     {% if user.is_authenticated and not user.username|is_client %}
-      <p class="centerable"><a href="{% url 'add_animal' %}">Add</a></p>
+      <p class="center"><a href="{% url 'add_animal' %}">Add</a></p>
     {% endif %}
 
-    <form class="centerable" method="GET" action="{% url 'animals' %}">
+    <form class="center" method="GET" action="{% url 'animals' %}">
       <span style="flex: left;">{{ search_form.as_p }}</span>
       <button type="submit">Search</button>
     </form>
@@ -33,7 +33,7 @@
       </div>
 
       {% else %}
-        <p>There are no animals in the zoo.</p>
+        <p class="center">There are no animals in the zoo.</p>
       {% endif %}
   </section>
 
