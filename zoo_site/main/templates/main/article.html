@@ -3,9 +3,11 @@
 {% block title %}Article{% endblock %}
 
 {% block content %}
-    <article itemscope itemtype="https://schema.org/Article">
+    {% load static %}
+
+    <article class="text-block" itemscope itemtype="https://schema.org/Article">
         <h1 itemprop="name">{{ article.title }}</h1>
-        <p itemprop="text">{{ content }}</p>
+        <div class="article"><p itemprop="text">{{ content }}</p></div>
         <small>
             <time itemprop="datePublished">{{ article.date }}</time>
         </small>

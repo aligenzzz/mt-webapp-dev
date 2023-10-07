@@ -3,20 +3,6 @@
 {% block title %}HTML/CSS things{% endblock %}
 
 {% block content %}
-    <script>
-        var link = document.getElementById('visited');
-
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            link.classList.add('visited');
-
-            setTimeout(function() {
-                link.classList.remove('visited');
-            }, 5000);
-        });
-    </script>
-
     <style>
         a[href^="https://"]:not(.visited) {
             font-weight: bold;
@@ -25,17 +11,38 @@
         a[href$=".com"]:not(.visited) {
             color: black;
         }
+
         .button.primary {
             background-color: black;
             color: white;
         }
+
         .visited:visited {
             color: var(--green-color);
         }
         .visited:link {
             color: var(--orange-color);
         }
+
+        .lang-q:lang(de) { quotes: "\201E" "\201C"; }
+        .lang-q:lang(en) { quotes: "\201C" "\201D"; }
+        .lang-q:lang(fr) { quotes: "\00AB" "\00BB"; }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var links = document.querySelectorAll(".visited");
+
+            links.forEach(function(link) {
+                link.addEventListener("click", function() {
+                    link.classList.add("visited");
+
+                    setTimeout(function() {
+                        link.classList.remove("visited");
+                    }, 5000);
+                });
+            });
+        });
+    </script>
 
     <section>
         <h1 class="center">HTML/CSS things</h1>
@@ -80,7 +87,19 @@
             </article>
             <article class="grid-item">
                 <h3>Visited and non-visited links</h3>
-                <a class="visited" id="visited" href="https://oz.by/">Link 2</a>
+                <a class="visited" id="visited" href="https://oz.by/">Link</a>
+            </article>
+            <article class="grid-item">
+                <h3>Different quotes</h3>
+                <p>Quote in french: <q lang="fr" class="lang-q">Ce que femme veut, Dieu le veut</q>.</p>
+                <p>Quote in german: <q lang="de" class="lang-q">Der Mensch, versuche die Gotter nicht</q>.</p>
+                <p>Quote in english: <q lang="en" class="lang-q">То be or not to be</q>.</p>
+            </article>
+            <article class="grid-item">
+                <h3>Inputs styling</h3>
+                <input type="checkbox" name="check"><span>Select</span><br>
+                <input type="text" value="Enabled">
+                <input type="text" disabled value="Disabled">
             </article>
         </div>
     </section>

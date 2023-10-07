@@ -38,5 +38,5 @@ urlpatterns = [
     path('coupons/', views.CouponListView.as_view(), name='coupons'),
     path('privacy_policy/', views.PrivacyPolicyView.as_view(), name='privacy_policy'),
     path('reviews/add/', views.ReviewCreate.as_view(), name='add_review'),
-    path('html/', views.HTMLView.as_view(), name='html'),
+    path('css_html/', views.HTMLCSSView.as_view(), name='css_html'),
 ]

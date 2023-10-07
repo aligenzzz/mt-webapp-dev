@@ -44,10 +44,10 @@
             {% endfor %}
         </select><br>
 
-          <label for="daily_feed">Daily Feed:</label>
-          <input type="number" id="daily_feed" name="daily_feed" step="0.01" value="{{ animal.daily_feed }}"><br>
+        <label for="daily_feed">Daily Feed:</label>
+        <input type="number" id="daily_feed" min="0.01" name="daily_feed" step="0.01" value="{{ animal.daily_feed }}"><br>
 
-          <input type="submit" value="Update">
+        <input type="submit" value="Update">
     </form>
 
 {% endblock %}

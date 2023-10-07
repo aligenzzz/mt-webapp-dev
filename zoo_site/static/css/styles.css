@@ -1,8 +1,8 @@
 :root {
   --gap-size: 20px;
   --column-count: 3;
-  --green-color: #6b8e23;
-  --lightgreen-color: #20603d;
+  --green-color: #20603d;
+  --lightgreen-color: #6b8e23;
   --orange-color: #d3430f;
 }
 
@@ -12,7 +12,12 @@
 }
 
 * :not(code) {
-    font-family: "Trirong", serif;
+    font-family: "Trirong", "Times New Roman", serif;
+}
+
+::selection {
+    background-color: var(--lightgreen-color);
+    color: white;
 }
 
 header {
@@ -24,6 +29,20 @@ main {
 }
 footer {
     background-image: linear-gradient(to bottom left, #20603d, #6b8e23);
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        display: none;
+    }
+    footer {
+        display: none;
+    }
+}
+@media screen and (max-height: 500px) {
+    main {
+        display: none;
+    }
 }
 
 .icon {
@@ -261,7 +280,6 @@ a:focus:not(.menu-item) {
     position: absolute;
     left: 35%;
     background: white;
-    list-style-type: circle;
 }
 .list-box:hover li {
     opacity: 0.2;
@@ -276,7 +294,7 @@ a:focus:not(.menu-item) {
 .list-box li:hover {
     transform: scale(1.1);
     z-index: 5;
-    background: #6b8e23;
+    background: var(--lightgreen-color);
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     opacity: 1;
 }
@@ -285,7 +303,7 @@ a:focus:not(.menu-item) {
     height: 20px;
     text-align: center;
     line-height: 20px;
-    background: #d3430f;
+    background: var(--orange-color);
     color: white;
     display: inline-block;
     border-radius: 50%;
@@ -296,10 +314,29 @@ a:focus:not(.menu-item) {
 }
 .list-box li:hover span {
     background: white;
-    color: var(--green-color);
+    color: var(--lightgreen-color);
 }
 .list-box li:hover a {
     color: white;
+}
+
+.multicolor-list1 li:nth-child(even) span {
+    background: var(--green-color);
+}
+.multicolor-list1 li:hover:nth-child(even) span {
+    background: black;
+}
+.multicolor-list2 li:last-child span {
+    background: black;
+}
+.multicolor-list2 li:hover:last-child span {
+    background: white;
+}
+.multicolor-list2 li:first-child span {
+    background: black;
+}
+.multicolor-list2 li:hover:first-child span {
+    background: white;
 }
 
 .circle-block {
@@ -323,4 +360,77 @@ a:focus:not(.menu-item) {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+}
+
+.multicolor-table tr:first-child th:first-child {
+    background-color: var(--green-color);
+}
+.multicolor-table tr th:nth-child(even) {
+    background-color: var(--lightgreen-color);
+}
+.multicolor-table tr:last-child {
+    background-color: var(--orange-color);
+}
+
+input, select, textarea {
+    padding: 3px 5px 3px 5px;
+    margin: 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+input:required:hover {
+    border: 2px solid var(--orange-color);
+}
+input:optional:hover {
+    border: 2px solid var(--lightgreen-color);
+}
+input:checked + span {
+    background-color: #ccc;
+}
+input:disabled {
+    background-color: #ccc;
+}
+input:out-of-range {
+    background-color: #ff4c5b;
+}
+
+.article + small::before {
+    content: "✿";
+    color: var(--lightgreen-color);
+}
+.article + small::after {
+    content: "✿";
+    color: var(--lightgreen-color);
+}
+.article p::first-letter {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--lightgreen-color);
+}
+
+.marked::before {
+    content: "✿";
+    color: white
+}
+
+.text-block {
+    padding: 10px;
+    margin: 10px;
+    text-indent: 3em;
+    line-height: 1.5;
+    word-spacing: 4px;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+    hyphens: auto;
+    text-align: left;
+    position: static;
+}
+.text-block h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+    text-align: center;
+    transform: translate(-5%, 0);
 }

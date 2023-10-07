@@ -710,10 +710,10 @@ class ReviewCreate(CreateView):
             raise
 
 
-class HTMLView(View):
+class HTMLCSSView(View):
     @staticmethod
     def get(request):
         return render(
             request,
-            'main/_html.html'
+            'main/css_html.html'
         )

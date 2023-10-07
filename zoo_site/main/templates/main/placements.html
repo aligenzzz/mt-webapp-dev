@@ -18,9 +18,9 @@
   {% endif %}
 
   {% if placement_list %}
-  <ul>
+  <ul class="list-box">
     {% for placement in placement_list %}
-    <li>
+    <li class="marked" style="list-style: decimal-leading-zero;">
       <a href="{% url 'placement' id=placement.id %}">{{ placement }}</a>
     </li>
     {% endfor %}
