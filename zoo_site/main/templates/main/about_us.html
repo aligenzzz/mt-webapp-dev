@@ -14,38 +14,40 @@
         <li><span>05</span><a href="#documents">Documents</a></li>
       </ul>
 
-      <article id="basic_information">
+      <article id="basic_information" class="text-block">
         <h2>Basic information</h2>
         <p>{{ basic_information }}</p>
       </article>
 
-      <article id="history">
+      <article id="history" class="text-block">
         <h2>Our history</h2>
         <p>{{ our_history }}</p>
       </article>
 
-      <article id="video">
+      <article id="video" class="text-block" >
         <h2>Video</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/W2W6ZoaSAzc?autoplay=1"
+        <iframe class="center-container" width="560" height="600" src="https://www.youtube.com/embed/W2W6ZoaSAzc"
               frameborder="0" allowfullscreen title="Video">
         </iframe>
       </article>
 
-      <article id="audio">
+      <article id="audio" class="text-block">
         <h2 >Audio</h2>
-        <audio controls>
+        <audio class="center-container" controls>
           <source src="{% static 'audio/birds_singing.mp3' %}">
           Audio
         </audio>
       </article>
 
-      <article id="documents">
+      <article id="documents" class="text-block">
         <h2>Documents</h2>
-        <figure>
-          <img src="{% static 'img/certificate.jpg' %}"/>
-          <figcaption>Our certificate</figcaption>
-        </figure>
-        <a href="{% static 'img/certificate.jpg' %}" download>
+        <div class="certificate" >
+            <div>
+                <p class="title">Certificate</p>
+                <p class="text">To Zoo "<span class="company-name">Animal Adventure Park</span>"</p>
+            </div>
+        </div>
+        <a class="center-container" href="{% static 'img/certificate.jpg' %}" download>
           Download
         </a>
       </article>

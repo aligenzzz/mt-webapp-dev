@@ -6,8 +6,9 @@
    {% load static %}
 
    <article>
-      <h1 class="centerable">Static Info</h1>
-      <table class="multicolor-table" border="1">
+      <h1 class="center">Static Info</h1>
+      <table class="table multicolor-table" border="1">
+         <caption>Check table:</caption>
          <tr>
             <th id="criterion">Criterion</th>
             <th id="animals">Animals</th>
@@ -26,13 +27,16 @@
                <a href="{% url 'animal' id=animal.id %}">{{ animal }}</a>
             </td>
          </tr>
+         <tr><td></td></tr>
          <tr>
             <th id="most_consumed_fond" headers="criterion">
                <em>The most consumed fodder:</em>
             </th>
-            <td colspan="3" headers="most_consumed_fond" align="center">
+            <td></td>
+            <td headers="most_consumed_fond" align="center">
                {{ fodder_name }}
             </td>
+            <td></td>
          </tr>
       </table>
    </article>

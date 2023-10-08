@@ -5,12 +5,13 @@
 <section>
   <h1 class="center">Delete Animal</h1>
 
-  <p>Are you sure you want to delete the animal: {{ animal }}?</p>
-
-  <form method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes, delete."/>
-  </form>
+  <div align="center">
+    <p>Are you sure you want to delete the animal: {{ animal }}?</p>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Yes, delete."/>
+    </form>
+  </div>
 </section>
 
 {% endblock %}

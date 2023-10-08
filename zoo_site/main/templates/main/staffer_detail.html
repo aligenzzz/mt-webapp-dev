@@ -6,10 +6,12 @@
     {% load static %}
 
     <article>
-        <h1>Staffer Details</h1>
-        <div itemscope itemtype="https://schema.org/Person">
-            <img itemprop="image" src="{{ staffer.photo }}" alt="Staffer's photo" style="max-width: 200px;">
-            <ul>
+        <h1 class="center">Staffer Details</h1>
+        <div align="center" class="container" style="margin: 0 400px;" itemscope itemtype="https://schema.org/Person">
+            <div>
+                <img itemprop="image" src="{{ staffer.photo }}" alt="Staffer's photo" style="max-width: 200px;">
+            </div>
+            <ul style="text-align: left;">
                 <li itemprop="name">Name: {{ staffer.name }}</li>
                 <li itemprop="jobTitle">Post: {{ staffer.post }}</li>
                 <li itemprop="telephone">Phone number: {{ staffer.phone_number }}</li>

@@ -4,19 +4,23 @@
 
 {% block content %}
     <section>
-        <h1>Our vacancies</h1>
+        <h1 class="center">Our vacancies</h1>
 
         {% if vacancy_list %}
-        <ul>
+        <ul class="grid-container" style="--column-count: 2;">
             {% for vacancy in vacancy_list %}
-            <li >
-                <article itemscope itemtype="https://schema.org/JobPosting">
-                    <h3 itemprop="name"><mark>{{ vacancy }}</mark></h3>
+            <li class="grid-item">
+                <article class="vacancy" itemscope itemtype="https://schema.org/JobPosting">
+                    <div class="float-block">
+                        <h3 itemprop="name">{{ vacancy }}</h3>
+                    </div>
                     <h4>Count: {{ vacancy.count }}</h4>
-                    <h4>Description:</h4>
-                    <p itemprop="description">{{ vacancy.post.description }}</p>
-                    <h4>Requirements:</h4>
-                    <p itemprop="experienceRequirements">{{ vacancy.post.requirements }}</p>
+                    <div class="clear-block text-block">
+                        <h4>Description:</h4>
+                        <p itemprop="description">{{ vacancy.post.description }}</p>
+                        <h4>Requirements:</h4>
+                        <p itemprop="experienceRequirements">{{ vacancy.post.requirements }}</p>
+                    </div>
                 </article>
             </li>
             {% endfor %}

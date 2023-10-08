@@ -77,7 +77,7 @@
             <table>
                 <tr>
                     <td>
-                        <div align="center">
+                        <div class="latest-article">
                             <h2>Latest article</h2>
                             <img src="{{ latest_article.image }}" style="max-width: 200px;"
                                  alt="The latest article's image">
@@ -91,7 +91,7 @@
                     </td>
 
                     <td>
-                        <article>
+                        <article class="text-block" style="margin-left: 150px;">
                             <p style="font-size: 20px;"><em>Random fact about cats: </em><q>{{ fact }}</q></p>
                             <img style="max-width: 300px; max_height: 300px;" src="{{ image_url }}" alt="Dog's image">
                         </article>
@@ -104,51 +104,43 @@
     </main>
 
     <footer style="margin-top: 20px;">
-        <table align="center" style="color: white">
-            <tr>
-                <td align="center"><p>Our partners:</p></td>
-                <td align="right">
+        <div class="container">
+            <div>
+                <p class="center">Our partners:</p>
+                <div class="circle-block" style="display: inline-block;">
+                    <a target="_blank" href="https://afisha.relax.by/">
+                        <img src="{% static 'img/partner1.png' %}">
+                    </a>
+                </div>
+                <div class="circle-block" style="display: inline-block;">
+                    <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
+                        <img src="{% static 'img/partner2.png' %}">
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div align="right" class="icon-a-container">
                     <span><img class="mini-icon" src="{% static 'img/phone-icon.png' %}"/></span>
                     <a style="color: white;" href="tel:+375298225999" target="_blank">+375 (29) 822-59-99</a>
-                </td>
-            </tr>
-
-            <tr>
-                <td rowspan="2" align="center">
-                    <div class="circle-block">
-                        <a target="_blank" href="https://afisha.relax.by/">
-                            <img src="{% static 'img/partner1.png' %}">
-                        </a>
-                    </div>
-                    <div class="circle-block">
-                        <a target="_blank" href="https://www.ranova-pettreats.com/?yclid=18068669379530981375">
-                            <img src="{% static 'img/partner2.png' %}">
-                        </a>
-                    </div>
-                </td>
-                <td align="right">
+                </div>
+                <div align="right" class="icon-a-container">
                     <span><img class="mini-icon" src="{% static 'img/address-icon.png' %}"/></span>
-                    <a style="color: white;" href="https://maps.google.com/maps?q=10+Petrusya+Brovki+street,+Minsk,+Belarus"
-                       target="_blank">
+                    <a href="https://maps.google.com/maps?q=10+Petrusya+Brovki+street,+Minsk,+Belarus" target="_blank">
                         Minsk, Petrusya Brovki str., 10
                     </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td align="right">
+                </div>
+                <div align="right" class="icon-a-container">
                     <span><img class="mini-icon" src="{% static 'img/email-icon.png' %}"/></span>
                     <a style="color: white;" href="mailto:aap_zoo@gmail.com" target="_blank">aap_zoo@gmail.com</a>
-                </td>
-            </tr>
+                </div>
+            </div>
+        </div>
 
-            <tr>
-                <td colspan="2" align="center">
-                    <a style="color: white;" href="{% url 'privacy_policy' %}">Privacy policy</a>
-                    <p>&copy; 2023 Zoo "Animal Adventure Park". All rights reserved.</p>
-                </td>
-            </tr>
-        </table>
+        <div align="center">
+            <a style="color: white;" href="{% url 'privacy_policy' %}">Privacy policy</a>
+            <p>&copy; 2023 Zoo "<span class="company-name">Animal Adventure Park</span>". All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>

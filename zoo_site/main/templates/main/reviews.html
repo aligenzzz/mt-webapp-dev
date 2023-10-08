@@ -9,13 +9,15 @@
     <section>
         <h1 class="center">Reviews</h1>
 
-        {% if user.is_authenticated %}
-            {% if user.username|is_client %}
-                <a class="center" href="{% url 'add_review' %}">Leave a review...</a>
+        <div align="center">
+            {% if user.is_authenticated %}
+                {% if user.username|is_client %}
+                    <a href="{% url 'add_review' %}">Leave a review...</a>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'registration' %}">Leave a review...</a>
             {% endif %}
-        {% else %}
-            <a class="center" href="{% url 'registration' %}">Leave a review...</a>
-        {% endif %}
+        </div>
 
         {% if review_list %}
         <div class="grid-container indent">

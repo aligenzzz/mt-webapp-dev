@@ -6,21 +6,23 @@
     {% load static %}
     {% load filters %}
 
-    <h1>Hello, {{ user.username }}!</h1>
+    <div align="center">
+        <h1>Hello, {{ user.username }}!</h1>
 
-    {% if request.session.last_change %}
-        <p>Your last change: {{ request.session.last_change }}</p>
-    {% else %}
-        <p>Your last change: <em>no data</em></p>
-    {% endif %}
-
-    <ul>
-        <li><a href="{% url 'user_profile' %}">My Profile</a></li>
-        {% if not user.username|is_client %}
-            <li><a href="{% url 'user_animals' %}">View Animals</a></li>
-            <li><a href="{% url 'user_placements' %}">View Placements</a></li>
+        {% if request.session.last_change %}
+            <p>Your last change: {{ request.session.last_change }}</p>
+        {% else %}
+            <p>Your last change: <em>no data</em></p>
         {% endif %}
-        <li><a href="{% url 'user_settings' %}">Settings</a></li>
-        <li><a href="/main/accounts/logout/">Log out</a></li>
-    </ul>
+
+        <ul>
+            <li><a href="{% url 'user_profile' %}">My Profile</a></li>
+            {% if not user.username|is_client %}
+                <li><a href="{% url 'user_animals' %}">View Animals</a></li>
+                <li><a href="{% url 'user_placements' %}">View Placements</a></li>
+            {% endif %}
+            <li><a href="{% url 'user_settings' %}">Settings</a></li>
+            <li><a href="/main/accounts/logout/">Log out</a></li>
+        </ul>
+    </div>
 {% endblock %}

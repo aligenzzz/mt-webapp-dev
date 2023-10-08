@@ -3,13 +3,17 @@
 {% block title %}Edit/add placement{% endblock %}
 
 {% block content %}
-  <h1>Edit/add placement</h1>
+  <section>
+    <h1 class="center">Edit/add placement</h1>
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" />
-  </form>
+    <div align="center">
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </section>
 {% endblock %}

@@ -14,8 +14,7 @@
     {% endif %}
 
     <form class="center" method="GET" action="{% url 'animals' %}">
-      <span style="flex: left;">{{ search_form.as_p }}</span>
-      <button type="submit">Search</button>
+      {{ search_form.search_query }}
     </form>
 
       {% if animal_list %}

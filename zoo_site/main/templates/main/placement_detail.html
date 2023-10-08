@@ -7,23 +7,25 @@
     {% load filters %}
 
     <article>
-        <h1>Placement Details</h1>
+        <h1 class="center">Placement Details</h1>
 
-        <ul itemscope itemtype="https://schema.org/Place">
-            <li>Number: {{ placement.number }}</li>
-            <li>Name: <span itemprop="name">{{ placement.name }}</span></li>
-            {% if placement.basin %}
-                <li>There is basin!!!</li>
-            {% else %}
-                <li>There isn't basin :(</li>
+        <div align="center">
+            <ul itemscope itemtype="https://schema.org/Place">
+                <li>Number: {{ placement.number }}</li>
+                <li>Name: <span itemprop="name">{{ placement.name }}</span></li>
+                {% if placement.basin %}
+                    <li>There is basin!!!</li>
+                {% else %}
+                    <li>There isn't basin :(</li>
+                {% endif %}
+                <li itemprop="area">Area: {{ placement.area }}</li>
+                <li><a href="{% url 'placement_animals' id=placement.id %}">View Animals</a></li>
+            </ul>
+
+            {% if user.is_authenticated and not user.username|is_client %}
+                <p><a href="{% url 'edit_placement' pk=placement.id %}">Edit</a></p>
+                <p><a href="{% url 'delete_placement' pk=placement.id %}">Delete</a></p>
             {% endif %}
-            <li itemprop="area">Area: {{ placement.area }}</li>
-            <li><a href="{% url 'placement_animals' id=placement.id %}">View Animals</a></li>
-        </ul>
-
-        {% if user.is_authenticated and not user.username|is_client %}
-            <p><a href="{% url 'edit_placement' pk=placement.id %}">Edit</a></p>
-            <p><a href="{% url 'delete_placement' pk=placement.id %}">Delete</a></p>
-        {% endif %}
+        </div>
     </article>
 {% endblock %}

@@ -5,25 +5,32 @@
 {% block content %}
     {% load static %}
 
-    <h1>News</h1>
+    <section>
+        <h1 class="center">News</h1>
 
-    {% if article_list %}
-    <ul>
-        {% for article in article_list %}
-            <li style="margin: 20px;">
-                <article itemscope itemtype="https://schema.org/Article" style="margin: 10px;">
-                    <img itemprop="image" src="{{ article.image }}" style="max-width: 200px;"
-                         alt="Article's image">
-                    <h2 itemprop="name">{{ article.title }}</h2>
-                    <small itemprop="datePublished">{{ article.date }}</small>
-                    <p itemprop="description">{{ article.short_description }}</p>
-                    <a href="{% url 'article' id=article.id %}">Read more...</a>
-                </article>
-            </li>
-        {% endfor %}
-    </ul>
+        {% if article_list %}
+        <ul class="grid-container" style="--column-count: 2;">
+            {% for article in article_list %}
+                <li class="grid-item">
+                    <article class="container" itemscope itemtype="https://schema.org/Article" style="margin: 10px;">
+                        <div>
+                            <h2 itemprop="name">{{ article.title }}</h2>
+                            <img itemprop="image" src="{{ article.image }}" style="max-width: 200px;"
+                                 alt="Article's image">
+                        </div>
+                        <div style="text-align: left;">
+                            <br><br>
+                            <small itemprop="datePublished">{{ article.date }}</small>
+                            <p itemprop="description" class="short-description">{{ article.short_description }}</p>
+                            <a href="{% url 'article' id=article.id %}">Read more...</a>
+                        </div>
+                    </article>
+                </li>
+            {% endfor %}
+        </ul>
 
-    {% else %}
-        <p>There are no articles.</p>
-    {% endif %}
+        {% else %}
+            <p>There are no articles.</p>
+        {% endif %}
+    </section>
 {% endblock %}

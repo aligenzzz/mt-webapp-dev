@@ -3,13 +3,17 @@
 {% block title %}Leave a review{% endblock %}
 
 {% block content %}
-  <h1>Leave a review</h1>
+  <section>
+    <h1 class="center">Leave a review</h1>
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit"/>
-  </form>
+    <div align="center">
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="Leave"/>
+      </form>
+    </div>
+  </section>
 {% endblock %}

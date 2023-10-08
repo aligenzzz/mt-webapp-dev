@@ -9,6 +9,7 @@
 * {
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 * :not(code) {
@@ -22,13 +23,16 @@
 
 header {
     background-image: linear-gradient(to bottom right, #6b8e23, #20603d);
+    position: fixed;
+    z-index: 100;
 }
 main {
-    padding-top: 10px;
+    padding-top: 140px;
     min-height: 500px;
 }
 footer {
     background-image: linear-gradient(to bottom left, #20603d, #6b8e23);
+    color: white;
 }
 
 @media screen and (max-width: 700px) {
@@ -277,7 +281,7 @@ a:focus:not(.menu-item) {
 
 .list-box {
     width: 30%;
-    position: absolute;
+    position: relative;
     left: 35%;
     background: white;
 }
@@ -425,12 +429,143 @@ input:out-of-range {
     word-spacing: 4px;
     letter-spacing: 2px;
     word-wrap: break-word;
-    hyphens: auto;
     text-align: left;
     position: static;
 }
-.text-block h1, h2, h3, h4, h5, h6 {
-    text-transform: uppercase;
+.text-block h1, h2 {
+    font-variant: small-caps;
+    text-transform: capitalize;
     text-align: center;
-    transform: translate(-5%, 0);
+    transform: translate(-3%, 0);
+}
+
+.company-name {
+    font-kerning: normal;
+    font-size: 120%;
+}
+
+.latest-article {
+    position: relative;
+    left: 40%;
+}
+.latest-article + * {
+    position: relative;
+    left: 40%;
+}
+
+footer > table {
+    color: white;
+    width: 100%;
+}
+
+.icon-a-container {
+    display: flex;
+    align-items: center;
+}
+.icon-a-container span {
+    margin-right: 10px;
+}
+.icon-a-container a {
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+.container > div {
+    padding: 10px;
+}
+
+.column-article {
+    column-count: 3;
+    column-gap: 10px;
+}
+.column-article p {
+    margin: 0;
+}
+
+.short-description {
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table {
+    margin: 0 auto;
+    width: 120%
+    position: absolute;
+    border-collapse: collapse;
+}
+.table td:empty {
+    background-color: lightgray;
+}
+.table caption {
+    text-align: center;
+    font-weight: bold;
+}
+.table th, td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+.diagram {
+    width: 500px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+}
+
+.certificate {
+    width: 40%;
+    height: 430px;
+    margin: 20px auto;
+    border: 30px solid #40c4c8;
+    padding: 20px;
+    moz-border-image: url("../img/certificate_border.png");
+    -webkit-border-image: url("../img/certificate_border.png");
+    -o-border-image: url("../img/certificate_border.png");
+    border-image: url("../img/certificate_border.png");
+    border-image-repeat: repeat;
+    border-image-slice: 30%;
+    position: relative;
+}
+.certificate > div {
+    background-image: url("../img/certificate_background.png");
+    width: 130%;
+    height: 120%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: -8%;
+    left: -18%;
+    z-index: 10;
+}
+.certificate > div > .title, .text {
+    font-size: 24px;
+    color: purple;
+    text-align: center;
+    transform: translate(0, +500%);
+}
+
+.center-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.vacancy {
+    clear: both;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+.vacancy .float-block {
+    float: left;
+    margin-right: 10px;
+}
+.vacancy .clear-block {
+    clear: both;
 }

@@ -6,32 +6,33 @@
     {% load static %}
 
     <article>
-        <h1>Animal Details</h1>
+        <h1 class="center">Animal Details</h1>
+        <div align="center">
+            <img src="{{ animal.image }}" alt="Animal's image" style="max-width: 200px;">
+            <ul>
+                <li>Name: {{ animal.name }}</li>
+                <li>Species: {{ animal.species }}</li>
+                <li>Animal class: {{ animal.animal_class }}</li>
+                <li>Staffer: <a href="{% url 'staffer' id=animal.staffer.id %}">
+                    {{ animal.staffer }}</a>
+                </li>
+                <li>Country: {{ animal.country }}</li>
+                <li>Placement: <a href="{% url 'placement' id=animal.placement.id %}">
+                    {{ animal.placement }}</a>
+                </li>
+                <li>Fodder: {{ animal.fodder }}</li>
+                <li>Admission date: {{ animal.admission_date }}</li>
+                <li>Birth date: {{ animal.birth_date }}</li>
+                <li>Info: {{ animal.info }}</li>
+                <li>Daily feed: {{ animal.daily_feed }}</li>
+            </ul>
 
-        <img src="{{ animal.image }}" alt="Animal's image" style="max-width: 200px;">
-        <ul>
-            <li>Name: {{ animal.name }}</li>
-            <li>Species: {{ animal.species }}</li>
-            <li>Animal class: {{ animal.animal_class }}</li>
-            <li>Staffer: <a href="{% url 'staffer' id=animal.staffer.id %}">
-                {{ animal.staffer }}</a>
-            </li>
-            <li>Country: {{ animal.country }}</li>
-            <li>Placement: <a href="{% url 'placement' id=animal.placement.id %}">
-                {{ animal.placement }}</a>
-            </li>
-            <li>Fodder: {{ animal.fodder }}</li>
-            <li>Admission date: {{ animal.admission_date }}</li>
-            <li>Birth date: {{ animal.birth_date }}</li>
-            <li>Info: {{ animal.info }}</li>
-            <li>Daily feed: {{ animal.daily_feed }}</li>
-        </ul>
-
-        {% if user.is_authenticated %}
-            {% if user.username == animal.staffer.username %}
-                <p><a href="{% url 'edit_animal' pk=animal.id %}">Edit</a></p>
-                <p><a href="{% url 'delete_animal' pk=animal.id %}">Delete</a></p>
+            {% if user.is_authenticated %}
+                {% if user.username == animal.staffer.username %}
+                    <p><a href="{% url 'edit_animal' pk=animal.id %}">Edit</a></p>
+                    <p><a href="{% url 'delete_animal' pk=animal.id %}">Delete</a></p>
+                {% endif %}
             {% endif %}
-        {% endif %}
+        </div>
     </article>
 {% endblock %}

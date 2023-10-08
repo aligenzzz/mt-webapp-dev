@@ -3,10 +3,12 @@
 {% block title %}Diagram{% endblock %}
 
 {% block content %}
-  <article>
-    <h1>Diagram</h1>
+  {% load static %}
 
-    <div style="width: 500px; height: 300px; margin-bottom: 200px;">
+  <article>
+    <h1 class="center">Diagram</h1>
+
+    <div class="diagram">
       {{ plot_div|safe }}
     </div>
   </article>

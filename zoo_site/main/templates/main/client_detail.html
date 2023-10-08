@@ -4,11 +4,13 @@
 
 {% block content %}
     <article>
-        <h1>Client Details</h1>
-        <ul itemscope itemtype="https://schema.org/Person">
-            <li itemprop="name">Name: {{ client.name }}</li>
-            <li itemprop="telephone">Phone number: {{ client.phone_number }}</li>
-            <li itemprop="email">E-mail: {{ email }}</li>
-        </ul>
+        <h1 class="center">Client Details</h1>
+        <div align="center">
+            <ul itemscope itemtype="https://schema.org/Person">
+                <li itemprop="name">Name: {{ client.name }}</li>
+                <li itemprop="telephone">Phone number: {{ client.phone_number }}</li>
+                <li itemprop="email">E-mail: {{ email }}</li>
+            </ul>
+        </div>
     </article>
 {% endblock %}

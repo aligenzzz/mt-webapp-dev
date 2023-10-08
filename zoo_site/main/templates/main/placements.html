@@ -6,26 +6,27 @@
   {% load static %}
   {% load filters %}
 
-  <form method="GET" action="{% url 'placements' %}">
-    {{ search_form.as_p }}
-    <button type="submit">Search</button>
-  </form>
+  <section>
+    <h1 class="center">All placements</h1>
 
-  <h1>All placements</h1>
+    {% if user.is_authenticated and not user.username|is_client %}
+      <p class="center"><a href="{% url 'add_placement' %}">Add</a></p>
+    {% endif %}
 
-  {% if user.is_authenticated and not user.username|is_client %}
-    <p><a href="{% url 'add_placement' %}">Add</a></p>
-  {% endif %}
+    <form class="center" method="GET" action="{% url 'placements' %}">
+      {{ search_form.search_query }}
+    </form>
 
-  {% if placement_list %}
-  <ul class="list-box">
-    {% for placement in placement_list %}
-    <li class="marked" style="list-style: decimal-leading-zero;">
-      <a href="{% url 'placement' id=placement.id %}">{{ placement }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-    <p>There are no placements in the zoo.</p>
-  {% endif %}
+    {% if placement_list %}
+      <ul class="list-box">
+        {% for placement in placement_list %}
+          <li class="marked" style="list-style: decimal-leading-zero;">
+            <a href="{% url 'placement' id=placement.id %}">{{ placement }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="center">There are no placements in the zoo.</p>
+    {% endif %}
+  </section>
 {% endblock %}
