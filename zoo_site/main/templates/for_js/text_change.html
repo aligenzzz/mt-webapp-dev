@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text change</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <style>
+        form, input[type="range"], input[type="color"] {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+        <form>
+            <input type="range" id="fontSize" min="10" max="50" step="1">
+            <input type="color" id="textColor">
+            <input type="color" id="backgroundColor">
+        </form>
+        <br><br><br>
+        <h1>Example of some text</h1>
+    </div>
+    <script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

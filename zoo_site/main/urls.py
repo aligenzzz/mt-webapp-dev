@@ -38,5 +38,11 @@ urlpatterns = [
     path('coupons/', views.CouponListView.as_view(), name='coupons'),
     path('privacy_policy/', views.PrivacyPolicyView.as_view(), name='privacy_policy'),
     path('reviews/add/', views.ReviewCreate.as_view(), name='add_review'),
-    path('css_html/', views.HTMLCSSView.as_view(), name='css_html'),
+    path('other/', views.OtherView.as_view(), name='other'),
+
+    # for JavaScript things
+    path('other/text_change/', views.TextChangeView.as_view(), name='text_change'),
+    path('other/age_calculator/', views.AgeCalculatorView.as_view(), name='age_calculator'),
+    path('other/interactive_table/', views.InteractiveTableView.as_view(), name='interactive_table'),
+    path('other/scrolling_animation/', views.ScrollingAnimationView.as_view(), name='scrolling_animation'),
 ]

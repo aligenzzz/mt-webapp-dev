@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Age calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <style>
+    input[type="date"] {
+      font-size: 22px;
+    }
+    button {
+      background-color: #555555;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+    p {
+      font-size: 32px;
+    }
+  </style>
+</head>
+<body>
+  <div align="center">
+    <form id="ageCalculator">
+      <input type="date" id="birthdate" required>
+      <button type="submit">Enter</button>
+    </form>
+    <p id="ageResult"></p>
+    <p id="dayOfWeek"></p>
+  </div>
+  <script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

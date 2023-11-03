@@ -7,16 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>{% block title %}Zoo Home{% endblock %}</title>
-    <script>
-        function updateDateTime()
-        {
-            var currentDateTime = new Date();
-            var formattedDateTime = currentDateTime.toLocaleString();
-            var element = document.getElementById("current-datetime");
-            element.innerHTML = formattedDateTime;
-        }
-        setInterval(updateDateTime, 1000);
-    </script>
 
     {% load static %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
@@ -27,7 +17,14 @@
 <body>
     <header style="padding-bottom: 10px;">
         <div style="width: 100%;">
-            <p style="text-align:center; color: white; font-size: 12px;" id="current-datetime"></p>
+            <div align="center">
+                <span style="color: white; font-size: 12px;" id="current-datetime">
+                    XX.XX.XXXX, XX:XX:XX
+                </span>
+                <span style="color: white; font-size: 12px;" id="countdown">
+                    XX:XX
+                </span>
+            </div>
             <nav>
                 <div class="flex-div" style="width: 100%;">
                     <img class="icon flex-div-el" src="{% static 'img/icon.png' %}" alt="icon">
@@ -51,7 +48,7 @@
                     {% else %}
                         <a class="menu-item flex-div-el" href="/main/accounts/login/">Personal Account</a>
                     {% endif %}
-                    <a class="menu-item flex-div-el" href="{% url 'css_html' %}">HTML/CSS</a>
+                    <a class="menu-item flex-div-el" href="{% url 'other' %}">Other</a>
                 </div>
             </nav>
         </div>
@@ -142,5 +139,7 @@
             <p>&copy; 2023 Zoo "<span class="company-name">Animal Adventure Park</span>". All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="{% static 'js/site.js' %}"></script>
 </body>
 </html>

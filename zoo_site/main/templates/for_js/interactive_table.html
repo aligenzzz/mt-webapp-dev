@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Interactive table</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <style>
+    button {
+      width: 100%;
+      background-color: #555555;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 5px 10px;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+    #table {
+      margin-top: 20px;
+      border-collapse: collapse;
+      border: 1px solid black;
+    }
+    #table td {
+      border: 1px solid black;
+      text-align: center;
+      vertical-align: middle;
+      padding: 10px;
+    }
+    .selected:nth-child(even) {
+      background-color: lightpink;
+    }
+    .selected:nth-child(odd) {
+      background-color: lightblue;
+    }
+  </style>
+</head>
+<body>
+  <div align="center">
+    <table>
+      <tr>
+        <td colspan="2">
+          <label for="tableSize">Enter table's size:</label>
+        </td>
+        <td colspan="2">
+          <input type="number" id="tableSize" min="1" max="30" value="1" step="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label for="maxSelection">Max selections in row/column:</label>
+        </td>
+        <td colspan="2">
+          <input type="number" id="maxSelection" min="1" max="30" value="1" step="1" required>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button id="generateTable">Generate</button>
+        </td>
+        <td>
+          <button id="transposeTable">Transpose</button>
+        </td>
+        <td>
+          <button id="addRow">New row</button>
+        </td>
+        <td>
+          <button id="addColumn">New column</button>
+        </td>
+      </tr>
+    </table>
+    <table id="table"></table>
+  </div>
+
+  <script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

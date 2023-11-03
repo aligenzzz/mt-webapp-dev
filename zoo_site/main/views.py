@@ -710,10 +710,48 @@ class ReviewCreate(CreateView):
             raise
 
 
-class HTMLCSSView(View):
+class OtherView(View):
     @staticmethod
     def get(request):
         return render(
             request,
-            'main/css_html.html'
+            'main/other.html'
+        )
+
+
+# -------------------------------------------------------------
+# for JavaScript things
+class TextChangeView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/text_change.html'
+        )
+
+
+class AgeCalculatorView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/age_calculator.html'
+        )
+
+
+class InteractiveTableView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/interactive_table.html'
+        )
+
+
+class ScrollingAnimationView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/scrolling_animation.html'
         )
