@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Price calculation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <style>
+        input {
+            width: 30%;
+            padding: 5px 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+        button {
+            width: 30%;
+            background-color: #555555;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+      <form>
+        <input type="number" min="0.01" step="0.01"
+               title="Enter the price."
+               id="priceInput" value="1"><br>
+        <input type="number" min="0" max="100" step="1"
+               title="Enter the discount."
+               id="discountInput" value="0"><br>
+        <button id="enterButton">Enter</button>
+      </form>
+      <p id="result"></p>
+    </div>
+    <script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

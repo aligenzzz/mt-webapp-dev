@@ -14,8 +14,42 @@ function updateDateTime() {
 setInterval(updateDateTime, 1000);
 
 
-// 2
+/*
+2. Placing several banners on the site and rotating them after a period of time,
+which can be changed by the administrator using the form element. To start and stop
+banner changes, use a page focus check. Each banner provides a click on its own link.
+*/
+const imageContainer = document.getElementById("imageContainer");
+const animationTimeInput = document.getElementById("animationTime");
 
+if (imageContainer) {
+    const images = imageContainer.childNodes;
+    images.forEach(image => {
+        image.addEventListener("mouseover", function () {
+            images.forEach(i => {
+                if (i.style) {
+                    i.style.animationPlayState = "paused";
+                }
+            });
+        });
+        image.addEventListener("mouseout", function () {
+            images.forEach(i => {
+                if (i.style) {
+                    i.style.animationPlayState = "running";
+                }
+            });
+        });
+        image.addEventListener("click", function () {
+            window.open("http://127.0.0.1:8000/main/");
+        });
+    });
+}
+if (animationTimeInput) {
+    animationTimeInput.addEventListener("input", function () {
+        const animationTime = animationTimeInput.value + "s";
+        document.documentElement.style.setProperty("--animation-time", animationTime);
+    });
+}
 
 /*
 3. Animation effect when scrolling (multiple images).
@@ -88,7 +122,29 @@ if (backgroundColorInput) {
 }
 
 
-// 6
+/*
+6. Using promo codes when calculating the cost of services/goods/...
+*/
+const enterButton = document.getElementById("enterButton");
+if (enterButton) {
+    enterButton.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const priceInput = document.getElementById("priceInput");
+        const discountInput = document.getElementById("discountInput");
+        const result = document.getElementById("result");
+
+        const price = priceInput.value;
+        const discount = discountInput.value;
+
+        if (price <= 0 || discount < 0 || discount > 100) {
+            result.innerText = "Invalid Data!"
+        } else {
+            var general = price - price * (discount / 100);
+            result.innerText = `Generally, ${Math.round(general * 100) / 100}\$`;
+        }
+    });
+}
 
 
 /*
@@ -204,7 +260,7 @@ const addColumnButton = document.getElementById("addColumn");
 if (generateTableButton) {
     generateTableButton.addEventListener("click", function () {
         const size = document.getElementById("tableSize").value;
-        if (size <= 0) {
+        if (size <= 0 || size > 30) {
             return;
         }
 
@@ -239,6 +295,7 @@ if (transposeTableButton) {
             for (let j = 0; j < columnsCount; j++) {
                 var columns = rows[j].getElementsByTagName("td");
                 var cell = columns[i].cloneNode(true);
+                cell.addEventListener("click", cellSelection);
                 row.appendChild(cell);
             }
             table.appendChild(row);
@@ -289,7 +346,13 @@ function createCell(row) {
     row.appendChild(cell);
 }
 function cellSelection(e) {
-    const maxSelection = document.getElementById("maxSelection").value;
+    var maxSelection = document.getElementById("maxSelection").value;
+    if (maxSelection > 30) {
+        maxSelection = 30;
+    } else if (maxSelection < 0) {
+        maxSelection = 0;
+    }
+
     const cell = e.target;
     const row = cell.parentElement;
     const rowCells = Array.from(row.cells);
@@ -322,8 +385,180 @@ function hasNeighborSelected(cells, i) {
 }
 
 
-// 10
+/*
+10. In accordance with your subject area, create a base class and a successor class
+with five functions (including getters and setters), to provide a demonstration of their
+capabilities. Create a decorator for one of the functions and demonstrate its use. Implement
+two options: 1) prototypical inheritance in the functional style and 2) the "class"/"extends"
+construction
+*/
+const classFunctionActivator = document.getElementById("classFunctionActivator");
+if (classFunctionActivator) {
+    classFunctionActivator.addEventListener("click", function (e) {
+        e.preventDefault();
+        console.clear();
+
+        functionalInheritance();
+        classInheritance();
+    });
+}
+function functionalInheritance() {
+    function withTimestamp(fn) {
+      return function() {
+        const timestamp = new Date().toLocaleString();
+        const result = fn.apply(this, arguments);
+        return `${timestamp}: ${result}`;
+      };
+    }
+
+    function Animal(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Animal.prototype.getName = function() {
+        return this.name;
+    };
+    Animal.prototype.setName = function(name) {
+        this.name = name;
+    };
+    Animal.prototype.getAge = function() {
+        return this.age;
+    };
+    Animal.prototype.setAge = function(age) {
+        this.age = age;
+    };
+    Animal.prototype.getDetails = withTimestamp(function() {
+        return `Name: ${this.name}, Age: ${this.age}`;
+    });
+
+    function Dog(name, age, breed) {
+        Animal.call(this, name, age);
+        this.breed = breed;
+
+        this.getBreed = function () {
+            return this.breed;
+        }
+        this.setBreed = function (breed) {
+            this.breed = breed;
+        }
+    }
+    Dog.prototype = Object.create(Animal.prototype);
+    Dog.prototype.bark = function() {
+        return `${this.name} barks!`;
+    };
+    Dog.prototype.getDetails = function() {
+        const animalDetails = Animal.prototype.getDetails.call(this);
+        return `${animalDetails}, Breed: ${this.getBreed()}`;
+    };
+
+    const myAnimal = new Animal("Rover", 5);
+    const myDog = new Dog("Buddy", 3, "Golden Retriever");
+
+    console.log(myDog.getName());
+    myDog.setName("Badass");
+    console.log(myDog.getName());
+    console.log(myAnimal.getDetails());
+    console.log(myDog.getDetails());
+    console.log(myDog.bark());
+}
+function classInheritance() {
+    function withTimestamp(fn) {
+      return function() {
+        const timestamp = new Date().toLocaleString();
+        const result = fn.apply(this, arguments);
+        return `${timestamp}: ${result}`;
+      };
+    }
+
+    class Animal {
+        constructor(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        getName() {
+            return this.name;
+        }
+        setName(name) {
+            this.name = name;
+        }
+        getAge() {
+            return this.age;
+        }
+        setAge(age) {
+            this.age = age;
+        }
+        getDetails = withTimestamp(() => {
+            return `Name: ${this.name}, Age: ${this.age}`;
+        });
+    }
+
+    class Dog extends Animal {
+        constructor(name, age, breed) {
+            super(name, age);
+            this.breed = breed;
+        }
+        getBreed() {
+            return this.breed;
+        }
+        setBreed(breed) {
+            this.breed = breed;
+        }
+        bark() {
+            return `${this.name} barks!`;
+        }
+        getDetails() {
+            const animalDetails = super.getDetails();
+            return `${animalDetails}, Breed: ${this.getBreed()}`;
+        }
+    }
+
+    const myAnimal = new Animal("Rover", 5);
+    const myDog = new Dog("Buddy", 3, "Golden Retriever");
+
+    console.log(myDog.getName());
+    myDog.setName("Badass");
+    console.log(myDog.getName());
+    console.log(myAnimal.getDetails());
+    console.log(myDog.getDetails());
+    console.log(myDog.bark());
+}
 
 
-// 11
+/*
+11. Develop scripts that implement an algorithm for solving the problem using associative
+arrays. Input of the initial data and Output of the results obtained should be carried out
+using the <form> html document form.
+2.) An associative array containing information about several cars is given: make of
+the car, its number and the name of the owner. Find the names of the owners and
+numbers of cars of this make.
+*/
+const searchButton = document.getElementById("searchButton");
+if (searchButton) {
+    const carsData = [
+        new Map([ ["make", "Toyota"], ["number", "ABC123"], ["owner", "Shallow"] ]),
+        new Map([ ["make", "Honda"], ["number", "XYZ789"], ["owner", "Rubin"] ]),
+        new Map([ ["make", "Toyota"], ["number", "DEF456"], ["owner", "Sword"] ]),
+        new Map([ ["make", "Nissan"], ["number", "A2KHG2"], ["owner", "Casper"] ])
+    ];
 
+    searchButton.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const carMake = document.getElementById("carMake").value;
+        const resultsDiv = document.getElementById("resultsDiv");
+        resultsDiv.innerHTML = "";
+
+        const matchingCars = carsData.filter(car => car.get("make").toLowerCase() === carMake.toLowerCase());
+        if (matchingCars.length === 0) {
+            resultsDiv.innerHTML = "This make of car was not found.";
+        } else {
+            const resultList = document.createElement("ul");
+            matchingCars.forEach(car => {
+                const listItem = document.createElement("li");
+                    listItem.textContent = `Owner: ${car.get("owner")}, Number: ${car.get("number")}`;
+                    resultList.appendChild(listItem);
+                });
+            resultsDiv.appendChild(resultList);
+        }
+    });
+}

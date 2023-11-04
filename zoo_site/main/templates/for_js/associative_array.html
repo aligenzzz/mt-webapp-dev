@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associative array</title>
+    {% load static %}
+    <style>
+        input {
+            padding: 5px 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+        button {
+            background-color: #555555;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        ul {
+            list-style: none;
+        }
+        #resultsDiv {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+        <form>
+            <input type="text" id="carMake" placeholder="Enter make of car...">
+            <button type="button" id="searchButton">Search</button>
+        </form>
+        <div id="resultsDiv"></div>
+    </div>
+    <script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

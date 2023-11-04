@@ -755,3 +755,30 @@ class ScrollingAnimationView(View):
             request,
             'for_js/scrolling_animation.html'
         )
+
+
+class AssociativeArrayView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/associative_array.html'
+        )
+
+
+class PriceCalculationView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/price_calculation.html'
+        )
+
+
+class AutoplayCarouselView(View):
+    @staticmethod
+    def get(request):
+        return render(
+            request,
+            'for_js/autoplay_carousel.html'
+        )

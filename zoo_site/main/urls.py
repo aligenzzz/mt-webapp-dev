@@ -45,4 +45,7 @@ urlpatterns = [
     path('other/age_calculator/', views.AgeCalculatorView.as_view(), name='age_calculator'),
     path('other/interactive_table/', views.InteractiveTableView.as_view(), name='interactive_table'),
     path('other/scrolling_animation/', views.ScrollingAnimationView.as_view(), name='scrolling_animation'),
+    path('other/associative_array/', views.AssociativeArrayView.as_view(), name='associative_array'),
+    path('other/price_calculation/', views.PriceCalculationView.as_view(), name='price_calculation'),
+    path('other/autoplay_carousel/', views.AutoplayCarouselView.as_view(), name='autoplay_carousel'),
 ]
