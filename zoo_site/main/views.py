@@ -769,9 +769,11 @@ class AssociativeArrayView(View):
 class PriceCalculationView(View):
     @staticmethod
     def get(request):
+        animals_count = Animal.objects.all().count()
         return render(
             request,
-            'for_js/price_calculation.html'
+            'for_js/price_calculation.html',
+            {"animals_count": animals_count}
         )
 
 

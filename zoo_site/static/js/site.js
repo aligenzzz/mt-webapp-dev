@@ -11,7 +11,7 @@ function updateDateTime() {
         element.innerText = formattedDateTime;
     }
 }
-setInterval(updateDateTime, 1000);
+setInterval(updateDateTime, 1);
 
 
 /*
@@ -130,18 +130,22 @@ if (enterButton) {
     enterButton.addEventListener("click", function (e) {
         e.preventDefault();
 
+        const kostyl = document.getElementById("kostyl");
+
         const priceInput = document.getElementById("priceInput");
         const discountInput = document.getElementById("discountInput");
         const result = document.getElementById("result");
 
         const price = priceInput.value;
         const discount = discountInput.value;
+        var k = parseInt(kostyl.innerText);
+        k += parseInt(discount);
 
         if (price <= 0 || discount < 0 || discount > 100) {
             result.innerText = "Invalid Data!"
         } else {
             var general = price - price * (discount / 100);
-            result.innerText = `Generally, ${Math.round(general * 100) / 100}\$`;
+            result.innerText = `Generally, ${Math.round(general * 100) / 100}\$\nCount = ${k}`;
         }
     });
 }
@@ -540,6 +544,9 @@ if (searchButton) {
         new Map([ ["make", "Toyota"], ["number", "DEF456"], ["owner", "Sword"] ]),
         new Map([ ["make", "Nissan"], ["number", "A2KHG2"], ["owner", "Casper"] ])
     ];
+
+    carsData.forEach(car =>
+           console.log(`Make: ${car.get("make")}, Owner: ${car.get("owner")}, Number: ${car.get("number")}`));
 
     searchButton.addEventListener("click", function (e) {
         e.preventDefault();
